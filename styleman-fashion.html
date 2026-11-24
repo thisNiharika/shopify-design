@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StyleMan — Modern Menswear</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --paper: #f4f1ed;
+        --ink: #15191d;
+        --muted: #6d6d70;
+        --line: #dedbd7;
+        --white: #fff;
+        --dark: #111820;
+        --accent: #a9c4dc;
+        --serif: 'Playfair Display', serif;
+        --sans: 'DM Sans', sans-serif
+      }
+
+      * {
+        box-sizing: border-box
+      }
+
+      html {
+        scroll-behavior: auto
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        overflow-x: hidden
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover
+      }
+
+      button {
+        font: inherit;
+        border: 0;
+        cursor: pointer
+      }
+
+      #smooth-wrapper {
+        overflow: hidden
+      }
+
+      #smooth-content {
+        will-change: transform
+      }
+
+      .nav {
+        height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5vw;
+        background: #f8f7f5;
+        position: relative;
+        z-index: 20
+      }
+
+      .logo {
+        font-size: 23px;
+        font-weight: 700;
+        line-height: .9;
+        letter-spacing: -1px
+      }
+
+      .logo small {
+        display: block;
+        font-size: 9px;
+        letter-spacing: 3px;
+        margin-top: 6px;
+        font-weight: 500
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 34px;
+        font-size: 12px;
+        font-weight: 600
+      }
+
+      .nav-icons {
+        display: flex;
+        gap: 20px;
+        font-size: 17px
+      }
+
+      .nav-icons span {
+        cursor: pointer
+      }
+
+      .menu-btn {
+        display: none;
+        background: none;
+        font-size: 22px
+      }
+
+      .hero {
+        height: min(720px, 76vw);
+        min-height: 570px;
+        position: relative;
+        background: #1a2731;
+        color: #fff;
+        overflow: hidden
+      }
+
+      .hero-img {
+        position: absolute;
+        inset: 0;
+        transform: scale(1.08)
+      }
+
+      .hero-img img {
+        object-position: 58% 42%;
+        filter: brightness(.75)
+      }
+
+      .hero:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(13, 19, 25, .84), rgba(13, 19, 25, .05) 78%)
+      }
+
+      .hero-copy {
+        position: absolute;
+        z-index: 2;
+        left: 10%;
+        top: 24%;
+        max-width: 490px
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 22px
+      }
+
+      .hero h1 {
+        font: clamp(54px, 7.5vw, 104px)/.92 var(--serif);
+        letter-spacing: -2px;
+        margin: 0 0 24px
+      }
+
+      .hero p {
+        font-size: 15px;
+        max-width: 360px;
+        color: #e7e8e9
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 22px;
+        background: #fff;
+        color: #14191d;
+        border-radius: 50px;
+        padding: 13px 22px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 18px;
+        transition: .3s
+      }
+
+      .pill:hover {
+        background: #dce7ef;
+        transform: translateY(-3px)
+      }
+
+      .hero-pagination {
+        position: absolute;
+        bottom: 32px;
+        left: 10%;
+        z-index: 3;
+        display: flex;
+        gap: 9px
+      }
+
+      .hero-pagination i {
+        height: 5px;
+        width: 27px;
+        border-radius: 8px;
+        background: #fff;
+        opacity: .45
+      }
+
+      .hero-pagination i:first-child {
+        opacity: 1;
+        width: 44px
+      }
+
+      .section {
+        padding: 76px 5vw
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        margin: 0 0 28px
+      }
+
+      .section-head h2 {
+        font: clamp(28px, 3.2vw, 45px)/1 var(--serif);
+        margin: 0
+      }
+
+      .section-head p {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 0
+      }
+
+      .categories {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        max-width: 1280px;
+        margin: -1px auto 76px;
+        padding: 0 5vw
+      }
+
+      .category {
+        border-radius: 12px;
+        overflow: hidden;
+        background: #e8e3de;
+        position: relative;
+        aspect-ratio: .8;
+        transition: transform .4s
+      }
+
+      .category:hover {
+        transform: translateY(-8px)
+      }
+
+      .category img {
+        transition: transform .7s
+      }
+
+      .category:hover img {
+        transform: scale(1.05)
+      }
+
+      .category-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(250, 248, 246, .93);
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        font-weight: 700
+      }
+
+      .feature {
+        margin: 0 4vw 76px;
+        border-radius: 20px;
+        overflow: hidden;
+        min-height: 390px;
+        position: relative;
+        background: #b7c9db;
+        color: #17212a
+      }
+
+      .feature img {
+        position: absolute;
+        inset: 0;
+        object-position: center 45%;
+        filter: brightness(.85)
+      }
+
+      .feature:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(13, 22, 32, .68), transparent 72%)
+      }
+
+      .feature-copy {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 9%;
+        transform: translateY(-50%);
+        max-width: 420px;
+        color: white
+      }
+
+      .feature-copy h2 {
+        font: 58px/.94 var(--serif);
+        margin: 12px 0
+      }
+
+      .feature-copy p {
+        font-size: 13px
+      }
+
+      .feature .pill {
+        background: #17212a;
+        color: #fff
+      }
+
+      .products {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px
+      }
+
+      .product {
+        min-width: 0
+      }
+
+      .product-img {
+        aspect-ratio: .78;
+        overflow: hidden;
+        border-radius: 9px;
+        background: #e1e3e8;
+        position: relative
+      }
+
+      .product-img img {
+        transition: transform .65s
+      }
+
+      .product:hover .product-img img {
+        transform: scale(1.06)
+      }
+
+      .quick {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        background: #fff;
+        border-radius: 50%;
+        height: 33px;
+        width: 33px;
+        display: grid;
+        place-items: center;
+        font-size: 16px
+      }
+
+      .product-info {
+        padding: 12px 3px
+      }
+
+      .product-info h3 {
+        font-size: 13px;
+        margin: 0 0 5px;
+        font-weight: 600
+      }
+
+      .product-info p {
+        font-size: 11px;
+        color: var(--muted);
+        margin: 0
+      }
+
+      .price {
+        font-weight: 700;
+        color: #25282c;
+        margin-top: 9px;
+        font-size: 12px
+      }
+
+      .promo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin: 70px 4vw
+      }
+
+      .promo {
+        min-height: 350px;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        background: #dedbd8
+      }
+
+      .promo img {
+        position: absolute;
+        inset: 0
+      }
+
+      .promo:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(250, 248, 246, .8), transparent 80%)
+      }
+
+      .promo-copy {
+        position: absolute;
+        z-index: 2;
+        left: 8%;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 210px
+      }
+
+      .promo-copy h2 {
+        font: 42px/.95 var(--serif);
+        margin: 0 0 12px
+      }
+
+      .promo-copy p {
+        font-size: 12px;
+        color: #4f5053
+      }
+
+      .promo-copy .pill {
+        padding: 11px 18px;
+        background: #15191d;
+        color: white
+      }
+
+      .editorial {
+        display: grid;
+        grid-template-columns: 1.1fr .9fr;
+        gap: 5vw;
+        align-items: center;
+        margin: 0 8vw 80px
+      }
+
+      .editorial-photo {
+        height: 440px;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative
+      }
+
+      .editorial-photo img {
+        transition: transform 1s
+      }
+
+      .editorial-photo:hover img {
+        transform: scale(1.04)
+      }
+
+      .editorial-copy h2 {
+        font: clamp(36px, 5vw, 65px)/.95 var(--serif);
+        margin: 14px 0
+      }
+
+      .editorial-copy p {
+        color: var(--muted);
+        max-width: 360px;
+        font-size: 14px;
+        line-height: 1.7
+      }
+
+      .editorial-copy .pill {
+        background: var(--dark);
+        color: white
+      }
+
+      .suit-banner {
+        margin: 0 4vw 75px;
+        min-height: 500px;
+        border-radius: 20px;
+        background: #e5dfd8;
+        position: relative;
+        overflow: hidden
+      }
+
+      .suit-banner img {
+        position: absolute;
+        inset: 0;
+        object-position: 70% center
+      }
+
+      .suit-banner:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(245, 241, 237, .9), rgba(245, 241, 237, .12) 65%)
+      }
+
+      .suit-copy {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 10%;
+        transform: translateY(-50%);
+        max-width: 350px
+      }
+
+      .suit-copy h2 {
+        font: clamp(48px, 6vw, 78px)/.9 var(--serif);
+        margin: 0
+      }
+
+      .suit-copy p {
+        font-size: 14px
+      }
+
+      .suit-copy .pill {
+        background: #111820;
+        color: #fff
+      }
+
+      .occasion {
+        padding: 0 5vw 75px
+      }
+
+      .occasion-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px
+      }
+
+      .occasion-card {
+        aspect-ratio: 1.6;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative
+      }
+
+      .occasion-card img {
+        transition: transform .6s
+      }
+
+      .occasion-card:hover img {
+        transform: scale(1.06)
+      }
+
+      .occasion-card:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, .65), transparent 65%)
+      }
+
+      .occasion-card h3 {
+        position: absolute;
+        z-index: 2;
+        bottom: 18px;
+        left: 18px;
+        color: white;
+        font-size: 20px;
+        margin: 0
+      }
+
+      .new-arrivals {
+        display: grid;
+        grid-template-columns: .8fr 1.2fr;
+        gap: 5vw;
+        align-items: center;
+        margin: 0 8vw 75px
+      }
+
+      .new-copy h2 {
+        font: clamp(38px, 4.5vw, 64px)/.95 var(--serif);
+        margin: 14px 0
+      }
+
+      .new-copy p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7
+      }
+
+      .new-photo {
+        height: 470px;
+        border-radius: 18px;
+        overflow: hidden
+      }
+
+      .instagram {
+        padding: 0 5vw 75px
+      }
+
+      .instagram h2 {
+        text-align: center;
+        font-size: 22px;
+        margin: 0 0 24px
+      }
+
+      .insta-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px
+      }
+
+      .insta-grid a {
+        aspect-ratio: 1;
+        border-radius: 9px;
+        overflow: hidden
+      }
+
+      .insta-grid img {
+        transition: transform .5s
+      }
+
+      .insta-grid a:hover img {
+        transform: scale(1.08)
+      }
+
+      .footer {
+        background: #ebe8e4;
+        padding: 50px 5vw 24px
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.4fr repeat(3, 1fr) 1.4fr;
+        gap: 30px
+      }
+
+      .footer h4 {
+        font-size: 12px;
+        margin: 0 0 15px
+      }
+
+      .footer a,
+      .footer p {
+        font-size: 11px;
+        color: #5e5f61;
+        display: block;
+        margin: 9px 0
+      }
+
+      .newsletter {
+        display: flex;
+        border-bottom: 1px solid #9b9a98;
+        padding: 10px 0;
+        gap: 10px
+      }
+
+      .newsletter input {
+        background: transparent;
+        border: 0;
+        outline: 0;
+        min-width: 0;
+        flex: 1;
+        font-size: 12px
+      }
+
+      .newsletter button {
+        background: #151a1f;
+        color: white;
+        padding: 8px 12px
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #d3d0cd;
+        margin-top: 35px;
+        padding-top: 18px;
+        font-size: 10px;
+        color: #737477
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px)
+      }
+
+      .image-reveal {
+        clip-path: inset(12% 0 12% 0);
+        transition: none
+      }
+
+      @media(max-width:900px) {
+        .nav-links {
+          gap: 18px
+        }
+
+        .hero {
+          min-height: 520px
+        }
+
+        .categories {
+          gap: 12px
+        }
+
+        .products {
+          grid-template-columns: repeat(2, 1fr)
+        }
+
+        .promo {
+          min-height: 280px
+        }
+
+        .editorial {
+          margin: 0 5vw 60px
+        }
+
+        .editorial-photo {
+          height: 350px
+        }
+
+        .suit-banner {
+          min-height: 400px
+        }
+
+        .new-arrivals {
+          margin: 0 5vw 60px
+        }
+
+        .new-photo {
+          height: 380px
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(3, 1fr)
+        }
+
+        .footer-brand {
+          grid-column: span 3
+        }
+      }
+
+      @media(max-width:600px) {
+        .nav {
+          height: 64px;
+          padding: 0 5vw
+        }
+
+        .nav-links {
+          display: none
+        }
+
+        .menu-btn {
+          display: block
+        }
+
+        .nav-icons {
+          gap: 13px
+        }
+
+        .hero {
+          height: 620px;
+          min-height: 0
+        }
+
+        .hero-copy {
+          left: 7%;
+          top: 23%;
+          max-width: 82%
+        }
+
+        .hero h1 {
+          font-size: 60px
+        }
+
+        .hero-img img {
+          object-position: 65% center
+        }
+
+        .categories {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 0 4vw;
+          margin-bottom: 50px;
+          gap: 12px
+        }
+
+        .category {
+          aspect-ratio: .95
+        }
+
+        .section {
+          padding: 50px 4vw
+        }
+
+        .section-head {
+          align-items: center
+        }
+
+        .section-head p {
+          max-width: 110px;
+          text-align: right
+        }
+
+        .feature {
+          margin: 0 3vw 55px;
+          min-height: 380px
+        }
+
+        .feature-copy {
+          left: 7%;
+          max-width: 75%
+        }
+
+        .feature-copy h2 {
+          font-size: 47px
+        }
+
+        .products {
+          gap: 12px
+        }
+
+        .product-img {
+          aspect-ratio: .73
+        }
+
+        .promo-grid {
+          grid-template-columns: 1fr;
+          margin: 50px 3vw;
+          gap: 14px
+        }
+
+        .promo {
+          min-height: 300px
+        }
+
+        .promo-copy h2 {
+          font-size: 36px
+        }
+
+        .editorial {
+          grid-template-columns: 1fr;
+          gap: 25px;
+          margin: 0 4vw 55px
+        }
+
+        .editorial-photo {
+          height: 310px
+        }
+
+        .editorial-copy h2 {
+          font-size: 45px
+        }
+
+        .suit-banner {
+          margin: 0 3vw 55px;
+          min-height: 510px
+        }
+
+        .suit-banner img {
+          object-position: 65% center
+        }
+
+        .suit-banner:after {
+          background: linear-gradient(0deg, rgba(245, 241, 237, .7), transparent 75%)
+        }
+
+        .suit-copy {
+          left: 7%;
+          top: 12%;
+          transform: none;
+          max-width: 70%
+        }
+
+        .suit-copy h2 {
+          font-size: 48px
+        }
+
+        .occasion {
+          padding: 0 4vw 55px
+        }
+
+        .occasion-grid {
+          grid-template-columns: 1fr;
+          gap: 12px
+        }
+
+        .occasion-card {
+          aspect-ratio: 1.7
+        }
+
+        .new-arrivals {
+          grid-template-columns: 1fr;
+          margin: 0 4vw 55px;
+          gap: 20px
+        }
+
+        .new-copy h2 {
+          font-size: 48px
+        }
+
+        .new-photo {
+          height: 360px
+        }
+
+        .insta-grid {
+          grid-template-columns: repeat(3, 1fr)
+        }
+
+        .insta-grid a:nth-child(n+4) {
+          display: none
+        }
+
+        .instagram {
+          padding: 0 4vw 55px
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 25px
+        }
+
+        .footer-brand {
+          grid-column: span 2
+        }
+
+        .footer-grid>div:last-child {
+          grid-column: span 2
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 10px
+        }
+
+        .section-head h2 {
+          font-size: 30px
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <!-- <header class="nav">
+          <a class="logo" href="#">StyleMan <small>MEN & FASHION</small>
+          </a>
+          <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#collections">Collections</a>
+            <a href="#lookbook">Lookbook</a>
+            <a href="#about">About</a>
+          </nav>
+          <div class="nav-icons">
+            <span>⌕</span>
+            <span>♙</span>
+            <span>♡</span>
+            <span>▱</span>
+          </div>
+          <button class="menu-btn" aria-label="Open menu">☰</button>
+        </header> -->
+        <section class="hero" id="home">
+          <div class="hero-img" data-speed="0.85">
+            <img src="https://images.unsplash.com/photo-1539103562942-d5f8e7c4f8a2?auto=format&fit=crop&w=2000&q=85" alt="Men's fashion editorial">
+          </div>
+          <div class="hero-copy">
+            <div class="eyebrow">New season / 2026</div>
+            <h1>Men’s <br>Fashion <br>Collection </h1>
+            <p>Modern looks for the modern man.</p>
+            <a class="pill" href="#shop">Shop now <span>→</span>
+            </a>
+          </div>
+          <div class="hero-pagination">
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </section>
+        <div class="categories" id="shop">
+          <a class="category" href="#">
+            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80" alt="T-shirt">
+            <div class="category-caption">T-Shirts <span>→</span>
+            </div>
+          </a>
+          <a class="category" href="#">
+            <img src="shirt.webp" alt="Shirts">
+            <div class="category-caption">Shirts <span>→</span>
+            </div>
+          </a>
+          <a class="category" href="#">
+            <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80" alt="Jeans">
+            <div class="category-caption">Jeans <span>→</span>
+            </div>
+          </a>
+          <a class="category" href="#">
+            <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=700&q=80" alt="Trousers">
+            <div class="category-caption">Trousers <span>→</span>
+            </div>
+          </a>
+        </div>
+        <section class="feature">
+          <img src="demin.webp" alt="Denim campaign">
+          <div class="feature-copy">
+            <div class="eyebrow">Featured collection</div>
+            <h2>Denim <br>Edit </h2>
+            <p>Classic denim. Modern style.</p>
+            <a class="pill" href="#">Explore denim →</a>
+          </div>
+        </section>
+        <section class="section">
+          <div class="section-head">
+            <h2>Trending Trousers</h2>
+            <p>Explore all styles&nbsp; →</p>
+          </div>
+          <div class="products">
+            <article class="product">
+              <div class="product-img">
+                <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=80" alt="Blue trousers">
+                <button class="quick">＋</button>
+              </div>
+              <div class="product-info">
+                <h3>Classic Slim Trouser</h3>
+                <p>Deep navy · tailored fit</p>
+                <div class="price">₹2,499</div>
+              </div>
+            </article>
+            <article class="product">
+              <div class="product-img">
+                <img src="trouser.webp" alt="Black trousers">
+                <button class="quick">＋</button>
+              </div>
+              <div class="product-info">
+                <h3>Essential Black</h3>
+                <p>Black · straight fit</p>
+                <div class="price">₹2,199</div>
+              </div>
+            </article>
+            <article class="product">
+              <div class="product-img">
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80" alt="Beige chinos">
+                <button class="quick">＋</button>
+              </div>
+              <div class="product-info">
+                <h3>Relaxed Chino</h3>
+                <p>Sand · relaxed fit</p>
+                <div class="price">₹2,799</div>
+              </div>
+            </article>
+            <article class="product">
+              <div class="product-img">
+                <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=700&q=80" alt="Cream trousers">
+                <button class="quick">＋</button>
+              </div>
+              <div class="product-info">
+                <h3>Weekend Cotton</h3>
+                <p>Stone · tapered fit</p>
+                <div class="price">₹1,999</div>
+              </div>
+            </article>
+          </div>
+        </section>
+        <div class="promo-grid">
+          <article class="promo">
+            <img src="formal.jpeg" alt="Formal menswear">
+            <div class="promo-copy">
+              <h2>Smart <br>Formals </h2>
+              <p>Refined looks for every occasion.</p>
+              <a class="pill" href="#">Shop now →</a>
+            </div>
+          </article>
+          <article class="promo">
+            <img src="cargo.jpeg" alt="Cargo trousers">
+            <div class="promo-copy">
+              <h2>Casual <br>Cargos </h2>
+              <p>Comfort meets utility.</p>
+              <a class="pill" href="#">Shop now →</a>
+            </div>
+          </article>
+        </div>
+        <section class="editorial" id="lookbook">
+          <div class="editorial-photo">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85" alt="Fashion lookbook">
+          </div>
+          <div class="editorial-copy">
+            <div class="eyebrow">Style guide</div>
+            <h2>Fit. Fabric. <br>Function. </h2>
+            <p>A complete guide to building a versatile wardrobe. Find your fit, choose your texture and make every piece work harder.</p>
+            <a class="pill" href="#">Read the guide →</a>
+          </div>
+        </section>
+        <section class="suit-banner">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1800&q=85" alt="Modern suit style">
+          <div class="suit-copy">
+            <h2>The <br>Modern <br>Suit </h2>
+            <p>Tailored. Timeless. You.</p>
+            <a class="pill" href="#">Shop suits →</a>
+          </div>
+        </section>
+        <section class="occasion">
+          <div class="section-head">
+            <h2>Shop by Occasion</h2>
+            <p>Dress for the moment</p>
+          </div>
+          <div class="occasion-grid">
+            <a class="occasion-card" href="#">
+              <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Workwear">
+              <h3>Workwear　→</h3>
+            </a>
+            <a class="occasion-card" href="#">
+              <img src="weekend.jpeg" alt="Weekend">
+              <h3>Weekend　→</h3>
+            </a>
+            <a class="occasion-card" href="#">
+              <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80" alt="Travel">
+              <h3>Travel　→</h3>
+            </a>
+          </div>
+        </section>
+        <section class="new-arrivals">
+          <div class="new-copy">
+            <div class="eyebrow">New arrivals</div>
+            <h2>Everyday <br>Essentials </h2>
+            <p>Timeless pieces for your daily rotation. Discover the staples that make getting dressed feel effortless.</p>
+            <a class="pill" href="#">Shop collection →</a>
+          </div>
+          <div class="new-photo">
+            <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1200&q=85" alt="Everyday menswear">
+          </div>
+        </section>
+        <section class="instagram">
+          <h2>◎ Follow Our Style</h2>
+          <div class="insta-grid">
+            <a href="#">
+              <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80" alt="Style post">
+            </a>
+            <a href="#">
+              <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Style post">
+            </a>
+            <a href="#">
+              <img src="style_a.jpeg" alt="Style post">
+            </a>
+            <a href="#">
+              <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" alt="Style post">
+            </a>
+            <a href="#">
+              <img src="style-b.webp" alt="Style post">
+            </a>
+          </div>
+        </section>
+        <!-- <footer class="footer" id="about">
+          <div class="footer-grid">
+            <div class="footer-brand">
+              <a class="logo" href="#">StyleMan <small>MEN & FASHION</small>
+              </a>
+              <p>Thoughtful essentials. Better everyday style.</p>
+            </div>
+            <div>
+              <h4>Shop</h4>
+              <a href="#">New arrivals</a>
+              <a href="#">Best sellers</a>
+              <a href="#">Denim</a>
+              <a href="#">Deals</a>
+            </div>
+            <div>
+              <h4>Help</h4>
+              <a href="#">FAQs</a>
+              <a href="#">Shipping</a>
+              <a href="#">Returns</a>
+              <a href="#">Contact</a>
+            </div>
+            <div>
+              <h4>About</h4>
+              <a href="#">Our story</a>
+              <a href="#">Lookbook</a>
+              <a href="#">Sustainability</a>
+            </div>
+            <div>
+              <h4>Stay in the loop</h4>
+              <p>New drops and style notes. No noise.</p>
+              <form class="newsletter">
+                <input type="email" placeholder="Your email address" aria-label="Your email">
+                <button type="submit">→</button>
+              </form>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <span>© 2026 StyleMan. All rights reserved.</span>
+            <span>Privacy　|　Terms　|　Cookies</span>
+          </div>
+        </footer> -->
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script>
+      // Smooth scrolling with Lenis + GSAP ScrollTrigger
+      const lenis = new Lenis({
+        duration: 1.15,
+        smoothWheel: true,
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1.15
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+      gsap.registerPlugin(ScrollTrigger);
+      // Hero entrance
+      const heroTl = gsap.timeline({
+        defaults: {
+          ease: 'power3.out'
+        }
+      });
+      heroTl.from('.nav', {
+        y: -25,
+        opacity: 0,
+        duration: .7
+      }).from('.hero-img', {
+        scale: 1.16,
+        duration: 1.7
+      }, '-=.25').from('.hero-copy .eyebrow', {
+        opacity: 0,
+        y: 20,
+        duration: .5
+      }, '-=1').from('.hero h1', {
+        opacity: 0,
+        y: 45,
+        duration: 1,
+        stagger: .12
+      }, '-=.4').from('.hero-copy p, .hero-copy .pill', {
+        opacity: 0,
+        y: 20,
+        duration: .6,
+        stagger: .1
+      }, '-=.5');
+      // Reveal blocks on scroll
+      gsap.utils.toArray('.section-head, .product, .promo, .editorial-copy, .suit-copy, .occasion-card, .new-copy, .instagram h2, .footer-grid > div').forEach((el) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 35,
+          duration: .75,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            once: true
+          }
+        });
+      });
+      // Image reveal masks
+      gsap.utils.toArray('.feature, .editorial-photo, .suit-banner, .new-photo').forEach((el) => {
+        gsap.from(el, {
+          clipPath: 'inset(12% 0 12% 0)',
+          duration: 1.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 82%',
+            once: true
+          }
+        });
+      });
+      // Horizontal product card entrance
+      gsap.from('.category', {
+        y: 28,
+        opacity: 0,
+        stagger: .1,
+        duration: .7,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.categories',
+          start: 'top 85%',
+          once: true
+        }
+      });
+      // Parallax images
+      gsap.utils.toArray('[data-speed]').forEach(el => gsap.to(el, {
+        yPercent: -10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      }));
+      // Newsletter form demo feedback
+      document.querySelector('.newsletter').addEventListener('submit', e => {
+        e.preventDefault();
+        const input = e.currentTarget.querySelector('input');
+        if (input.value.trim()) {
+          alert('Thanks for joining StyleMan!');
+          input.value = '';
+        }
+      });
+      // Refresh trigger positions after images load
+      window.addEventListener('load', () => ScrollTrigger.refresh());
+    </script>
+  </body>
+</html>
