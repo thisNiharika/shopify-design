@@ -1,0 +1,405 @@
+{% comment %}
+MEXICO JEANS — Shopify Atelier compatible homepage section
+Install: Online Store > Themes > Edit code > Sections > add mexico-jeans-home.liquid
+Then add this section to the homepage and configure the collections/blog in the editor.
+{% endcomment %}
+
+<section id="MexicoJeans-{{ section.id }}" class="mj-home">
+  {% if section.settings.announcement != blank %}
+    <div class="mj-announcement">{{ section.settings.announcement }}</div>
+  {% endif %}
+
+  <header class="mj-header">
+    <a class="mj-logo" href="{{ routes.root_url }}">{{ section.settings.logo_text | escape }} <i>{{ section.settings.logo_mark | escape }}</i></a>
+    <nav class="mj-nav">
+      <a href="#mj-fits-{{ section.id }}">Fits</a>
+      <a href="#mj-express-{{ section.id }}">Shop</a>
+      <a href="#mj-mag-{{ section.id }}">Magazine</a>
+      <a class="mj-pill" href="{{ routes.all_products_collection_url }}">Shop all</a>
+    </nav>
+  </header>
+
+  <div class="mj-hero">
+    {% if section.settings.hero_image != blank %}
+      {{ section.settings.hero_image | image_url: width: 2400 | image_tag: class: 'mj-hero-image', loading: 'eager', alt: section.settings.hero_image.alt }}
+    {% else %}
+      <div class="mj-hero-placeholder"></div>
+    {% endif %}
+    <div class="mj-hero-shade"></div>
+    <div class="mj-hero-copy">
+      <p class="mj-eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>
+      <h1>{{ section.settings.hero_line_1 | escape }}<br><em>{{ section.settings.hero_line_2 | escape }}</em></h1>
+      {% if section.settings.hero_text != blank %}<p class="mj-hero-description">{{ section.settings.hero_text }}</p>{% endif %}
+      {% if section.settings.hero_button_label != blank %}
+        <a class="mj-pill mj-pill-light" href="{{ section.settings.hero_button_link | default: routes.all_products_collection_url }}">{{ section.settings.hero_button_label | escape }}</a>
+      {% endif %}
+    </div>
+    <div class="mj-scroll">SCROLL TO EXPLORE ↓</div>
+    {% if section.settings.hero_badge != blank %}
+      <div class="mj-badge">{{ section.settings.hero_badge | escape }}</div>
+    {% endif %}
+  </div>
+
+  {% if section.settings.perks != blank %}
+    <div class="mj-perks" aria-label="Store highlights"><div class="mj-perks-track">
+      {% for i in (1..2) %}<span>{{ section.settings.perks | escape }}</span>{% endfor %}
+    </div></div>
+  {% endif %}
+
+  {% comment %} PICK YOUR FIT — selected collections {% endcomment %}
+  {% assign fits = section.settings.fit_collections %}
+  {% if fits != blank %}
+    <section class="mj-fits" id="mj-fits-{{ section.id }}">
+      <div class="mj-section-top"><p class="mj-eyebrow">01 / PICK YOUR FIT</p><h2>{{ section.settings.fit_heading | escape }}</h2></div>
+      <div class="mj-fit-grid">
+        {% for collection in fits %}
+          <a class="mj-fit-card" href="{{ collection.url }}">
+            <div class="mj-fit-image">
+              {% if collection.featured_image %}
+                {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: collection.title }}
+              {% endif %}
+            </div>
+            <span class="mj-fit-number">{{ forloop.index | prepend: '0' }}</span>
+            <span class="mj-fit-title">{{ collection.title | escape }}</span>
+            {% if collection.description != blank %}<span class="mj-fit-description">{{ collection.description | strip_html | truncate: 110 }}</span>{% endif %}
+          </a>
+        {% endfor %}
+        <div class="mj-fit-end">{{ section.settings.fit_end_text | escape }}</div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} EXPRESS YOUR EDGE — product carousel/grid from chosen collection {% endcomment %}
+  {% assign edge_collection = section.settings.edge_collection %}
+  {% if edge_collection != blank %}
+    <section class="mj-products-feature" id="mj-express-{{ section.id }}">
+      <div class="mj-feature-image">
+        {% if section.settings.edge_image != blank %}
+          {{ section.settings.edge_image | image_url: width: 2200 | image_tag: loading: 'lazy', alt: section.settings.edge_heading }}
+        {% elsif edge_collection.featured_image %}
+          {{ edge_collection.featured_image | image_url: width: 2200 | image_tag: loading: 'lazy', alt: edge_collection.title }}
+        {% endif %}
+      </div>
+      <div class="mj-feature-shade"></div>
+      <div class="mj-feature-copy">
+        <p class="mj-eyebrow">{{ section.settings.edge_eyebrow | escape }}</p>
+        <h2>{{ section.settings.edge_heading | escape }}</h2>
+        {% if section.settings.edge_text != blank %}<p>{{ section.settings.edge_text }}</p>{% endif %}
+        <a class="mj-pill mj-pill-light" href="{{ edge_collection.url }}">{{ section.settings.edge_button | escape }}</a>
+      </div>
+      <div class="mj-edge-products">
+        {% for product in edge_collection.products limit: section.settings.edge_count %}
+          <a href="{{ product.url }}" class="mj-mini-product">
+            <div class="mj-mini-image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</div>
+            <span>{{ product.title | escape }}</span><small>{{ product.price | money }}</small>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} EVERYDAY ESSENTIALS — collection product rows {% endcomment %}
+  {% assign essentials = section.settings.essentials_collection %}
+  {% if essentials != blank %}
+    <section class="mj-list">
+      <div class="mj-list-heading"><div><p class="mj-eyebrow">03 / EVERYDAY ESSENTIALS</p><h2>{{ section.settings.essentials_heading | escape }}</h2></div><a class="mj-underlined" href="{{ essentials.url }}">View collection ↗</a></div>
+      {% for product in essentials.products limit: section.settings.essentials_count %}
+        <a class="mj-product-row" href="{{ product.url }}">
+          <span class="mj-row-index">{{ forloop.index | prepend: '0' }}</span>
+          <span class="mj-row-title"><small>{{ product.vendor | escape }}</small>{{ product.title | escape }}</span>
+          <span class="mj-row-price">{{ product.price | money }}</span>
+          <span class="mj-row-thumb">{% if product.featured_image %}{{ product.featured_image | image_url: width: 350 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</span>
+        </a>
+      {% endfor %}
+    </section>
+  {% endif %}
+
+  {% comment %} JEANS & CARGO — selected categories {% endcomment %}
+  {% assign jeans_collection = section.settings.jeans_collection %}
+  {% assign cargo_collection = section.settings.cargo_collection %}
+  {% if jeans_collection != blank or cargo_collection != blank %}
+    <section class="mj-categories">
+      {% if jeans_collection != blank %}
+        <a class="mj-category" href="{{ jeans_collection.url }}">
+          {% if jeans_collection.featured_image %}{{ jeans_collection.featured_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: jeans_collection.title }}{% endif %}
+          <div><p class="mj-eyebrow">DENIM CLASSICS</p><h3>{{ section.settings.jeans_label | default: jeans_collection.title | escape }}</h3><span class="mj-underlined">Shop category ↗</span></div>
+        </a>
+      {% endif %}
+      {% if cargo_collection != blank %}
+        <a class="mj-category" href="{{ cargo_collection.url }}">
+          {% if cargo_collection.featured_image %}{{ cargo_collection.featured_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: cargo_collection.title }}{% endif %}
+          <div><p class="mj-eyebrow">UTILITY / EVERYDAY</p><h3>{{ section.settings.cargo_label | default: cargo_collection.title | escape }}</h3><span class="mj-underlined">Shop category ↗</span></div>
+        </a>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  {% comment %} SHOP THE COLLECTION — flexible collection links {% endcomment %}
+  {% if section.settings.shop_collections != blank %}
+    <section class="mj-shop-collections">
+      <div class="mj-list-heading"><div><p class="mj-eyebrow">05 / SHOP THE COLLECTION</p><h2>{{ section.settings.shop_heading | escape }}</h2></div></div>
+      <div class="mj-collection-links">
+        {% for collection in section.settings.shop_collections %}
+          <a href="{{ collection.url }}"><span>{{ collection.title | escape }}</span><b>↗</b></a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} YOUR NEXT FAVOURITE PAIR — category based editorial collection {% endcomment %}
+  {% assign favourite_collection = section.settings.favourite_collection %}
+  {% if favourite_collection != blank %}
+    <section class="mj-favourite">
+      <div class="mj-favourite-image">{% if section.settings.favourite_image != blank %}{{ section.settings.favourite_image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: section.settings.favourite_heading }}{% elsif favourite_collection.featured_image %}{{ favourite_collection.featured_image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: favourite_collection.title }}{% endif %}</div>
+      <div class="mj-favourite-copy"><p class="mj-eyebrow">06 / THE NEXT FAVOURITE</p><h2>{{ section.settings.favourite_heading | escape }}</h2><p>{{ section.settings.favourite_text }}</p><a class="mj-pill mj-pill-light" href="{{ favourite_collection.url }}">{{ section.settings.favourite_button | escape }}</a></div>
+    </section>
+  {% endif %}
+
+  {% comment %} FROM THE PEOPLE — testimonial blocks {% endcomment %}
+  {% assign reviews = section.blocks | where: 'type', 'testimonial' %}
+  {% if reviews.size > 0 %}
+    <section class="mj-reviews">
+      <p class="mj-eyebrow">07 / FROM THE PEOPLE</p><h2>{{ section.settings.reviews_heading | escape }}</h2>
+      {% for block in reviews %}
+        <article class="mj-review-card" {{ block.shopify_attributes }}>
+          <div><div class="mj-stars" aria-label="{{ block.settings.rating }} out of 5 stars">{% for star in (1..5) %}{% if star <= block.settings.rating %}★{% else %}☆{% endif %}{% endfor %}</div><blockquote>“{{ block.settings.quote }}”</blockquote><p class="mj-review-by">{{ block.settings.name | escape }}{% if block.settings.location != blank %} · {{ block.settings.location | escape }}{% endif %}</p>{% if block.settings.product != blank %}<a class="mj-underlined" href="{{ block.settings.product.url }}">Shop the product ↗</a>{% endif %}</div>
+          {% if block.settings.image != blank %}<div class="mj-review-image">{{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: block.settings.name }}{% if block.settings.product != blank %}<span>{{ block.settings.product.title | escape }}</span>{% endif %}</div>{% endif %}
+        </article>
+      {% endfor %}
+    </section>
+  {% endif %}
+
+  {% comment %} MAGAZINE — blog article blocks, choose a blog and show recent posts {% endcomment %}
+  {% assign magazine_blog = section.settings.magazine_blog %}
+  {% if magazine_blog != blank %}
+    <section class="mj-magazine" id="mj-mag-{{ section.id }}">
+      <div class="mj-list-heading"><div><p class="mj-eyebrow">08 / MAGAZINE</p><h2>{{ section.settings.mag_heading | escape }}</h2></div><a class="mj-underlined" href="{{ magazine_blog.url }}">All stories ↗</a></div>
+      <div class="mj-mag-grid">
+        {% for article in magazine_blog.articles limit: section.settings.mag_count %}
+          <a class="mj-mag-card" href="{{ article.url }}">
+            <div class="mj-mag-image">{% if article.image %}{{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title }}{% endif %}</div>
+            <small>{{ article.published_at | date: '%d %B %Y' }}</small><h3>{{ article.title | escape }}</h3><p>{{ article.excerpt_or_content | strip_html | truncate: 130 }}</p>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} Optional editorial blocks (craft/story) {% endcomment %}
+  {% assign editorials = section.blocks | where: 'type', 'editorial' %}
+  {% if editorials.size > 0 %}
+    <section class="mj-editorials">
+      {% for block in editorials %}
+        <a class="mj-editorial {% cycle 'mj-editorial-a', 'mj-editorial-b' %}" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+          <div class="mj-editorial-image">{% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: block.settings.title }}{% endif %}</div>
+          <p class="mj-eyebrow">{{ block.settings.eyebrow | escape }}</p><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.text }}</p>
+        </a>
+      {% endfor %}
+    </section>
+  {% endif %}
+
+  {% if section.settings.footer_note != blank %}
+    <div class="mj-footer-note"><p>{{ section.settings.footer_note }}</p></div>
+  {% endif %}
+</section>
+
+<style>
+#MexicoJeans-{{ section.id }}{--mj-bg:{{ section.settings.background }};--mj-fg:{{ section.settings.foreground }};--mj-accent:{{ section.settings.accent }};--mj-red:{{ section.settings.red }};--mj-gap:clamp(16px,3.5vw,56px);background:var(--mj-bg);color:var(--mj-fg);font-family:var(--font-body-family,sans-serif);overflow:hidden}
+#MexicoJeans-{{ section.id }} *{box-sizing:border-box}
+#MexicoJeans-{{ section.id }} img{display:block;width:100%;height:100%;object-fit:cover}
+#MexicoJeans-{{ section.id }} a{color:inherit;text-decoration:none}
+#MexicoJeans-{{ section.id }} h1,#MexicoJeans-{{ section.id }} h2,#MexicoJeans-{{ section.id }} h3{font-family:var(--font-heading-family,sans-serif);font-weight:800;letter-spacing:-.055em;line-height:.92}
+#MexicoJeans-{{ section.id }} .mj-announcement{position:relative;background:#000;color:#fff;text-align:center;padding:.55rem 1rem;font-size:.72rem;letter-spacing:.04em}
+#MexicoJeans-{{ section.id }} .mj-header{position:absolute;z-index:5;top:40px;left:0;right:0;padding:1rem var(--mj-gap);display:flex;justify-content:space-between;align-items:center;color:#fff}
+#MexicoJeans-{{ section.id }} .mj-logo{font-size:1.35rem;font-weight:900;letter-spacing:-.03em}
+#MexicoJeans-{{ section.id }} .mj-logo i{font-style:normal;background:var(--mj-red);color:#fff;font-size:.7rem;padding:.18em .45em;border-radius:3px}
+#MexicoJeans-{{ section.id }} .mj-nav{display:flex;gap:1.4rem;align-items:center;font-size:.85rem}
+#MexicoJeans-{{ section.id }} .mj-pill{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:.65em 1.2em;font-size:.85rem;transition:.25s}
+#MexicoJeans-{{ section.id }} .mj-pill:hover{background:var(--mj-fg);color:var(--mj-bg)}
+#MexicoJeans-{{ section.id }} .mj-pill-light{background:var(--mj-fg);color:var(--mj-bg)}
+#MexicoJeans-{{ section.id }} .mj-pill-light:hover{background:var(--mj-accent);border-color:var(--mj-accent)}
+#MexicoJeans-{{ section.id }} .mj-hero{position:relative;min-height:620px;height:min(100vh,1000px);display:flex;align-items:center;overflow:hidden;background:#050b1a}
+#MexicoJeans-{{ section.id }} .mj-hero-image{position:absolute;inset:0;transform:scale(1.02)}
+#MexicoJeans-{{ section.id }} .mj-hero-placeholder{position:absolute;inset:0;background:radial-gradient(circle at 55%,#27416f,#081329 70%)}
+#MexicoJeans-{{ section.id }} .mj-hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,11,26,.7),transparent 70%),linear-gradient(0deg,rgba(5,11,26,.65),transparent 50%)}
+#MexicoJeans-{{ section.id }} .mj-hero-copy{position:relative;z-index:2;padding:8vh var(--mj-gap);max-width:1100px}
+#MexicoJeans-{{ section.id }} .mj-eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-bottom:1.2rem}
+#MexicoJeans-{{ section.id }} .mj-hero h1{font-size:clamp(3.2rem,13vw,13rem);text-transform:uppercase;color:var(--mj-fg);margin-bottom:1.2rem}
+#MexicoJeans-{{ section.id }} .mj-hero h1 em{font-family:var(--font-heading-family,serif);font-style:italic;color:var(--mj-accent);text-transform:none}
+#MexicoJeans-{{ section.id }} .mj-hero-description{font-size:clamp(1rem,1.5vw,1.35rem);max-width:45ch;margin-bottom:1.5rem}
+#MexicoJeans-{{ section.id }} .mj-scroll{position:absolute;right:var(--mj-gap);bottom:var(--mj-gap);writing-mode:vertical-rl;font-size:.7rem;letter-spacing:.18em}
+#MexicoJeans-{{ section.id }} .mj-badge{position:absolute;right:7vw;top:23%;z-index:2;border:1px solid var(--mj-accent);border-radius:50%;width:clamp(90px,12vw,170px);aspect-ratio:1;display:grid;place-items:center;text-align:center;padding:1rem;color:var(--mj-accent);font-size:.75rem;letter-spacing:.14em;transform:rotate(-12deg)}
+#MexicoJeans-{{ section.id }} .mj-perks{overflow:hidden;white-space:nowrap;padding:1.1rem 0;border-bottom:1px solid rgba(255,255,255,.15)}
+#MexicoJeans-{{ section.id }} .mj-perks-track{display:flex;justify-content:space-around;gap:2rem;min-width:max-content;animation:mj-marquee-{{ section.id }} 22s linear infinite}
+#MexicoJeans-{{ section.id }} .mj-perks span{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+#MexicoJeans-{{ section.id }} .mj-perks span:after{content:"✦";color:var(--mj-accent);margin-left:2rem}
+@keyframes mj-marquee-{{ section.id }}{to{transform:translateX(-50%)}}
+#MexicoJeans-{{ section.id }} .mj-fits{padding:clamp(80px,10vw,160px) var(--mj-gap)}
+#MexicoJeans-{{ section.id }} .mj-section-top{margin-bottom:3rem}
+#MexicoJeans-{{ section.id }} .mj-section-top h2,#MexicoJeans-{{ section.id }} .mj-list-heading h2{font-size:clamp(2rem,6vw,6rem)}
+#MexicoJeans-{{ section.id }} .mj-fit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,48px);align-items:start}
+#MexicoJeans-{{ section.id }} .mj-fit-card{position:relative;display:block;padding-bottom:3rem}
+#MexicoJeans-{{ section.id }} .mj-fit-image{height:clamp(320px,62vh,700px);border-radius:220px 220px 12px 12px;overflow:hidden}
+#MexicoJeans-{{ section.id }} .mj-fit-image img{transition:transform .9s}
+#MexicoJeans-{{ section.id }} .mj-fit-card:hover img{transform:scale(1.06)}
+#MexicoJeans-{{ section.id }} .mj-fit-number{position:absolute;bottom:0;left:0;font-size:clamp(4rem,11vw,10rem);line-height:.8;color:transparent;-webkit-text-stroke:1px var(--mj-accent);font-weight:900}
+#MexicoJeans-{{ section.id }} .mj-fit-title{position:absolute;top:2rem;right:-.2rem;background:var(--mj-fg);color:var(--mj-bg);padding:.6em 1em;border-radius:999px;font-weight:700}
+#MexicoJeans-{{ section.id }} .mj-fit-description{display:block;opacity:.7;font-size:.85rem;margin-top:.6rem}
+#MexicoJeans-{{ section.id }} .mj-fit-end{align-self:center;font-size:clamp(2rem,5vw,5rem);font-weight:800;line-height:.95}
+#MexicoJeans-{{ section.id }} .mj-products-feature{position:relative;padding:clamp(60px,8vw,120px) var(--mj-gap);display:grid;grid-template-columns:1fr 1fr;gap:2rem;min-height:700px;align-items:center}
+#MexicoJeans-{{ section.id }} .mj-feature-image{position:absolute;inset:0}
+#MexicoJeans-{{ section.id }} .mj-feature-image img{filter:brightness(.6) saturate(1.25)}
+#MexicoJeans-{{ section.id }} .mj-feature-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,11,26,.7),transparent 80%)}
+#MexicoJeans-{{ section.id }} .mj-feature-copy{position:relative;z-index:2;max-width:50ch}
+#MexicoJeans-{{ section.id }} .mj-feature-copy h2{font-size:clamp(2.4rem,7vw,7rem);margin-bottom:1rem}
+#MexicoJeans-{{ section.id }} .mj-feature-copy p:not(.mj-eyebrow){margin-bottom:1.5rem}
+#MexicoJeans-{{ section.id }} .mj-edge-products{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-self:end}
+#MexicoJeans-{{ section.id }} .mj-mini-product{background:rgba(7,14,30,.7);padding:.6rem;border-radius:8px;backdrop-filter:blur(8px);font-size:.85rem}
+#MexicoJeans-{{ section.id }} .mj-mini-image{aspect-ratio:3/4;overflow:hidden;border-radius:5px;margin-bottom:.5rem}
+#MexicoJeans-{{ section.id }} .mj-mini-product small{display:block;opacity:.7;margin-top:.3rem}
+#MexicoJeans-{{ section.id }} .mj-list{padding:clamp(70px,10vw,160px) var(--mj-gap)}
+#MexicoJeans-{{ section.id }} .mj-list-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:3rem}
+#MexicoJeans-{{ section.id }} .mj-underlined{display:inline-block;border-bottom:1px solid currentColor;padding-bottom:3px;transition:color .2s}
+#MexicoJeans-{{ section.id }} .mj-underlined:hover{color:var(--mj-accent)}
+#MexicoJeans-{{ section.id }} .mj-product-row{display:grid;grid-template-columns:3rem 1fr auto 90px;gap:1rem;align-items:center;padding:clamp(1.2rem,2.6vw,2.4rem) 0;border-top:1px solid rgba(255,255,255,.2);position:relative;transition:padding .3s}
+#MexicoJeans-{{ section.id }} .mj-product-row:last-child{border-bottom:1px solid rgba(255,255,255,.2)}
+#MexicoJeans-{{ section.id }} .mj-row-title{font-size:clamp(1.2rem,3.2vw,3rem);font-weight:600;line-height:1.05}
+#MexicoJeans-{{ section.id }} .mj-row-title small{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;opacity:.55;margin-bottom:.4rem}
+#MexicoJeans-{{ section.id }} .mj-row-thumb{width:90px;height:120px;border-radius:8px;overflow:hidden}
+#MexicoJeans-{{ section.id }} .mj-categories{display:flex;min-height:80vh}
+#MexicoJeans-{{ section.id }} .mj-category{flex:1;position:relative;overflow:hidden;min-height:520px;transition:flex .6s;color:#fff}
+#MexicoJeans-{{ section.id }} .mj-category>img{position:absolute;inset:0;transition:transform 1s}
+#MexicoJeans-{{ section.id }} .mj-category:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,11,26,.75),transparent 60%)}
+#MexicoJeans-{{ section.id }} .mj-category:hover{flex:1.5}
+#MexicoJeans-{{ section.id }} .mj-category:hover>img{transform:scale(1.04)}
+#MexicoJeans-{{ section.id }} .mj-category>div{position:absolute;left:var(--mj-gap);bottom:var(--mj-gap);z-index:2}
+#MexicoJeans-{{ section.id }} .mj-category h3{font-size:clamp(3rem,11vw,10rem);color:transparent;-webkit-text-stroke:1.5px #fff;transition:.4s}
+#MexicoJeans-{{ section.id }} .mj-category:hover h3{color:#fff}
+#MexicoJeans-{{ section.id }} .mj-shop-collections{padding:clamp(70px,10vw,160px) var(--mj-gap)}
+#MexicoJeans-{{ section.id }} .mj-collection-links{display:grid;grid-template-columns:repeat(2,1fr);gap:0 2rem}
+#MexicoJeans-{{ section.id }} .mj-collection-links a{display:flex;justify-content:space-between;align-items:center;padding:1.3rem 0;border-top:1px solid rgba(255,255,255,.25);font-size:clamp(1.2rem,3vw,2.5rem)}
+#MexicoJeans-{{ section.id }} .mj-collection-links a:hover{color:var(--mj-accent)}
+#MexicoJeans-{{ section.id }} .mj-favourite{position:relative;min-height:650px;display:flex;align-items:center;padding:var(--mj-gap)}
+#MexicoJeans-{{ section.id }} .mj-favourite-image{position:absolute;inset:0}
+#MexicoJeans-{{ section.id }} .mj-favourite-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,11,26,.8),rgba(5,11,26,.15))}
+#MexicoJeans-{{ section.id }} .mj-favourite-copy{position:relative;z-index:2;max-width:600px}
+#MexicoJeans-{{ section.id }} .mj-favourite-copy h2{font-size:clamp(2.5rem,7vw,7rem);margin-bottom:1rem}
+#MexicoJeans-{{ section.id }} .mj-favourite-copy p:not(.mj-eyebrow){font-size:1.1rem;margin-bottom:1.5rem}
+#MexicoJeans-{{ section.id }} .mj-reviews{padding:clamp(70px,10vw,160px) var(--mj-gap)}
+#MexicoJeans-{{ section.id }} .mj-reviews h2{font-size:clamp(2rem,6vw,6rem);margin-bottom:3rem}
+#MexicoJeans-{{ section.id }} .mj-review-card{background:var(--mj-accent);color:var(--mj-bg);border-radius:20px;padding:clamp(1.2rem,3vw,3rem);display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center;margin-bottom:2rem}
+#MexicoJeans-{{ section.id }} .mj-review-card:nth-of-type(2){background:var(--mj-red);color:#fff}
+#MexicoJeans-{{ section.id }} .mj-stars{letter-spacing:.2em;margin-bottom:1rem}
+#MexicoJeans-{{ section.id }} .mj-review-card blockquote{font-size:clamp(1.3rem,3vw,2.8rem);line-height:1.1;font-weight:600}
+#MexicoJeans-{{ section.id }} .mj-review-by{margin-top:1.4rem;font-size:.85rem}
+#MexicoJeans-{{ section.id }} .mj-review-image{height:clamp(220px,48vh,550px);border-radius:12px;overflow:hidden;position:relative}
+#MexicoJeans-{{ section.id }} .mj-review-image span{position:absolute;bottom:1rem;left:1rem;background:#f2efe8;color:#0b1630;padding:.5em 1.1em;border-radius:99px;font-size:.8rem}
+#MexicoJeans-{{ section.id }} .mj-magazine{padding:clamp(60px,9vw,140px) var(--mj-gap)}
+#MexicoJeans-{{ section.id }} .mj-mag-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--mj-gap)}
+#MexicoJeans-{{ section.id }} .mj-mag-card:nth-child(2){margin-top:6vw}
+#MexicoJeans-{{ section.id }} .mj-mag-card:nth-child(3){margin-top:12vw}
+#MexicoJeans-{{ section.id }} .mj-mag-image{aspect-ratio:4/5;overflow:hidden;border-radius:12px;margin-bottom:1rem}
+#MexicoJeans-{{ section.id }} .mj-mag-image img{transition:transform .8s}
+#MexicoJeans-{{ section.id }} .mj-mag-card:hover img{transform:scale(1.05)}
+#MexicoJeans-{{ section.id }} .mj-mag-card small{opacity:.6;letter-spacing:.12em;text-transform:uppercase;font-size:.7rem}
+#MexicoJeans-{{ section.id }} .mj-mag-card h3{font-size:clamp(1.2rem,2vw,1.8rem);margin:.4rem 0 .5rem}
+#MexicoJeans-{{ section.id }} .mj-mag-card p{opacity:.75;font-size:.9rem}
+#MexicoJeans-{{ section.id }} .mj-editorials{padding:0 var(--mj-gap) clamp(60px,8vw,120px);display:grid;grid-template-columns:1fr 1fr;gap:var(--mj-gap)}
+#MexicoJeans-{{ section.id }} .mj-editorial{display:block}
+#MexicoJeans-{{ section.id }} .mj-editorial-b{margin-top:8vw}
+#MexicoJeans-{{ section.id }} .mj-editorial-image{aspect-ratio:4/3;border-radius:12px;overflow:hidden;margin-bottom:1.2rem}
+#MexicoJeans-{{ section.id }} .mj-editorial-image img{transition:transform .8s}
+#MexicoJeans-{{ section.id }} .mj-editorial:hover img{transform:scale(1.05)}
+#MexicoJeans-{{ section.id }} .mj-editorial h3{font-size:clamp(1.3rem,2.6vw,2.4rem);margin-bottom:.5rem}
+#MexicoJeans-{{ section.id }} .mj-editorial>p:last-child{opacity:.75}
+#MexicoJeans-{{ section.id }} .mj-footer-note{text-align:center;padding:4rem var(--mj-gap);border-top:1px solid rgba(255,255,255,.2);font-size:clamp(1.5rem,4vw,4rem);font-weight:700}
+@media(max-width:850px){#MexicoJeans-{{ section.id }} .mj-fit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#MexicoJeans-{{ section.id }} .mj-fit-end{grid-column:1/-1}#MexicoJeans-{{ section.id }} .mj-products-feature{grid-template-columns:1fr;min-height:900px}#MexicoJeans-{{ section.id }} .mj-edge-products{align-self:end}#MexicoJeans-{{ section.id }} .mj-mag-grid{grid-template-columns:1fr 1fr}#MexicoJeans-{{ section.id }} .mj-mag-card:nth-child(n){margin-top:0}}
+@media(max-width:600px){#MexicoJeans-{{ section.id }} .mj-nav a:not(.mj-pill){display:none}#MexicoJeans-{{ section.id }} .mj-hero{min-height:680px;height:90svh}#MexicoJeans-{{ section.id }} .mj-hero-copy{padding-top:15vh}#MexicoJeans-{{ section.id }} .mj-badge{right:5vw;top:18%;width:88px;font-size:.6rem}#MexicoJeans-{{ section.id }} .mj-fit-grid{grid-template-columns:1fr;gap:4rem}#MexicoJeans-{{ section.id }} .mj-fit-image{height:60vh}#MexicoJeans-{{ section.id }} .mj-fit-number{font-size:6rem}#MexicoJeans-{{ section.id }} .mj-products-feature{min-height:850px;padding-top:80px}#MexicoJeans-{{ section.id }} .mj-edge-products{grid-template-columns:1fr 1fr}#MexicoJeans-{{ section.id }} .mj-list-heading{align-items:flex-start;flex-direction:column}#MexicoJeans-{{ section.id }} .mj-product-row{grid-template-columns:2rem 1fr auto}#MexicoJeans-{{ section.id }} .mj-row-thumb{display:none}#MexicoJeans-{{ section.id }} .mj-categories{flex-direction:column}#MexicoJeans-{{ section.id }} .mj-category{min-height:65vh;flex:none}#MexicoJeans-{{ section.id }} .mj-collection-links{grid-template-columns:1fr}#MexicoJeans-{{ section.id }} .mj-review-card{grid-template-columns:1fr}#MexicoJeans-{{ section.id }} .mj-review-image{height:35vh}#MexicoJeans-{{ section.id }} .mj-mag-grid{grid-template-columns:1fr}#MexicoJeans-{{ section.id }} .mj-editorials{grid-template-columns:1fr}#MexicoJeans-{{ section.id }} .mj-editorial-b{margin-top:0}}
+</style>
+
+{% schema %}
+{
+  "name": "Mexico Jeans — Home",
+  "tag": "section",
+  "class": "mexico-jeans-home-section",
+  "settings": [
+    {"type":"text","id":"announcement","label":"Announcement bar","default":"FREE SHIPPING ON ORDERS ABOVE ₹2,999 · EASY 7-DAY RETURNS"},
+    {"type":"text","id":"logo_text","label":"Brand name","default":"MEXICO"},
+    {"type":"text","id":"logo_mark","label":"Logo mark","default":"JEANS"},
+    {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"text","id":"hero_eyebrow","label":"Hero eyebrow","default":"DENIM, THE MEXICO WAY"},
+    {"type":"text","id":"hero_line_1","label":"Hero title line 1","default":"MADE TO"},
+    {"type":"text","id":"hero_line_2","label":"Hero title line 2","default":"MOVE."},
+    {"type":"textarea","id":"hero_text","label":"Hero description","default":"Denim that moves with you. Made for every version of your everyday."},
+    {"type":"text","id":"hero_button_label","label":"Hero button","default":"Shop the denim"},
+    {"type":"url","id":"hero_button_link","label":"Hero button link"},
+    {"type":"text","id":"hero_badge","label":"Hero circular badge","default":"BUILT FOR THE EVERYDAY"},
+    {"type":"text","id":"perks","label":"Marquee text","default":"BUILT TO LAST · FREE SHIPPING · EASY RETURNS · DENIM FOR EVERY DAY"},
+    {"type":"text","id":"fit_heading","label":"Pick your fit heading","default":"Find your fit."},
+    {"type":"collection_list","id":"fit_collections","label":"Pick your fit collections","limit":8},
+    {"type":"text","id":"fit_end_text","label":"End text","default":"Your fit.<br>Your rules."},
+    {"type":"collection","id":"edge_collection","label":"Express your edge collection"},
+    {"type":"image_picker","id":"edge_image","label":"Express your edge background image"},
+    {"type":"text","id":"edge_eyebrow","label":"Express eyebrow","default":"02 / EXPRESS YOUR EDGE"},
+    {"type":"text","id":"edge_heading","label":"Express heading","default":"Denim with a point of view."},
+    {"type":"textarea","id":"edge_text","label":"Express text","default":"Find the pieces that feel like you."},
+    {"type":"text","id":"edge_button","label":"Express button label","default":"Explore the collection"},
+    {"type":"range","id":"edge_count","label":"Express products count","min":2,"max":8,"step":1,"default":4},
+    {"type":"collection","id":"essentials_collection","label":"Everyday essentials collection"},
+    {"type":"text","id":"essentials_heading","label":"Essentials heading","default":"The everyday rotation."},
+    {"type":"range","id":"essentials_count","label":"Essentials products count","min":3,"max":12,"step":1,"default":6},
+    {"type":"collection","id":"jeans_collection","label":"Jeans category collection"},
+    {"type":"text","id":"jeans_label","label":"Jeans label","default":"JEANS"},
+    {"type":"collection","id":"cargo_collection","label":"Cargo category collection"},
+    {"type":"text","id":"cargo_label","label":"Cargo label","default":"CARGO"},
+    {"type":"collection_list","id":"shop_collections","label":"Shop the collection links","limit":12},
+    {"type":"text","id":"shop_heading","label":"Shop collections heading","default":"Find your next favourite."},
+    {"type":"collection","id":"favourite_collection","label":"Your next favourite collection"},
+    {"type":"image_picker","id":"favourite_image","label":"Favourite pair feature image"},
+    {"type":"text","id":"favourite_heading","label":"Favourite pair heading","default":"The pair you reach for."},
+    {"type":"textarea","id":"favourite_text","label":"Favourite pair text","default":"The perfect fit isn't complicated. It's the one you never want to take off."},
+    {"type":"text","id":"favourite_button","label":"Favourite button label","default":"Find your pair"},
+    {"type":"blog","id":"magazine_blog","label":"Magazine blog"},
+    {"type":"text","id":"mag_heading","label":"Magazine heading","default":"Stories worth wearing."},
+    {"type":"range","id":"mag_count","label":"Magazine article count","min":2,"max":9,"step":1,"default":3},
+    {"type":"color","id":"background","label":"Background color","default":"#0b1630"},
+    {"type":"color","id":"foreground","label":"Text color","default":"#f2efe8"},
+    {"type":"color","id":"accent","label":"Accent color","default":"#e8a33d"},
+    {"type":"color","id":"red","label":"Red accent","default":"#d62027"},
+    {"type":"textarea","id":"footer_note","label":"Footer note","default":"DENIM, THE MEXICO WAY."}
+  ],
+  "blocks": [
+    {
+      "type":"testimonial",
+      "name":"Customer testimonial",
+      "settings":[
+        {"type":"textarea","id":"quote","label":"Review quote","default":"The fit is just right and the denim feels made to last."},
+        {"type":"text","id":"name","label":"Customer name","default":"A happy customer"},
+        {"type":"text","id":"location","label":"Location"},
+        {"type":"range","id":"rating","label":"Rating","min":1,"max":5,"step":1,"default":5},
+        {"type":"image_picker","id":"image","label":"Customer image"},
+        {"type":"product","id":"product","label":"Related product"}
+      ]
+    },
+    {
+      "type":"editorial",
+      "name":"Editorial / Craft story",
+      "settings":[
+        {"type":"text","id":"eyebrow","label":"Eyebrow","default":"CRAFT / CULTURE"},
+        {"type":"text","id":"title","label":"Title","default":"Made with intention."},
+        {"type":"textarea","id":"text","label":"Description","default":"A story about the details that make denim yours."},
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"url","id":"link","label":"Link"}
+      ]
+    }
+  ],
+  "presets":[
+    {"name":"Mexico Jeans — Home","blocks":[
+      {"type":"testimonial"},
+      {"type":"testimonial"},
+      {"type":"editorial"},
+      {"type":"editorial"}
+    ]}
+  ]
+}
+{% endschema %}
