@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mexico Jeans — Denim, the mexico way</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1630;--fg:#f2efe8;--thread:#e8a33d;--red:#d62027;
+  --gap:clamp(16px,3.5vw,56px);
+  --mega:clamp(4rem,26vw,28rem);
+  --h2:clamp(2rem,6vw,6rem);
+  --p:clamp(.9rem,1.1vw,1.1rem);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{font-family:'Bricolage Grotesque',sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden;font-size:var(--p);line-height:1.5}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.ser{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+.mask{display:block;overflow:hidden;padding-bottom:.08em}
+.mask>span{display:block;will-change:transform}
+.tag{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.65}
+.ul{display:inline-block;border-bottom:1px solid currentColor;padding-bottom:2px;transition:.3s}
+.ul:hover{color:var(--thread)}
+.pill{display:inline-block;border:1px solid currentColor;padding:.55em 1.2em;border-radius:99px;transition:.3s;font-size:.85rem}
+.pill:hover{background:var(--fg);color:var(--bg)}
+.pill.fill{background:var(--fg);color:var(--bg)}
+.pill.fill:hover{background:var(--thread);border-color:var(--thread);color:#0b1630}
+
+/* grain */
+body::after{content:"";position:fixed;inset:-50%;z-index:80;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* loader */
+.load{position:fixed;inset:0;z-index:100;background:#050b1a;color:#f2efe8;display:flex;flex-direction:column;justify-content:space-between;padding:var(--gap)}
+.load .n{font-size:clamp(5rem,22vw,20rem);font-weight:800;letter-spacing:-.06em;line-height:.8;text-align:right}
+.load .bar{height:2px;background:repeating-linear-gradient(90deg,var(--thread) 0 14px,transparent 14px 24px);transform-origin:left;transform:scaleX(0);margin-top:1rem}
+
+/* announcement + header */
+.ann{position:fixed;top:0;left:0;right:0;z-index:70;background:#000;color:#fff;text-align:center;font-size:.72rem;padding:.55em 1em;letter-spacing:.02em}
+.head{position:fixed;top:34px;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:1rem var(--gap);mix-blend-mode:difference;color:#fff}
+.logo{font-weight:800;letter-spacing:-.02em;font-size:1.3rem;display:flex;align-items:center;gap:.4rem}
+.logo i{font-style:normal;background:var(--red);color:#fff;font-size:.7rem;padding:.2em .45em;border-radius:3px;mix-blend-mode:normal}
+.menu{display:flex;gap:1.8rem;font-size:.85rem;align-items:center}
+.menu .pill:hover{background:#fff;color:#000}
+@media(max-width:700px){.menu a:not(.pill){display:none}}
+
+/* hero: zip open the denim */
+.hero{height:100vh;min-height:560px;position:relative;overflow:hidden;background:#050b1a}
+.hero .under{position:absolute;inset:0;z-index:1}
+.hero .under img{transform:scale(1.25);will-change:transform}
+.hero .under::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,11,26,.25),transparent 40%,rgba(5,11,26,.8))}
+.dn{position:absolute;inset:0;z-index:2;will-change:transform,clip-path;
+  background-color:#0f2150;
+  background-image:
+    repeating-linear-gradient(115deg,rgba(255,255,255,.055) 0 1px,transparent 1px 4px),
+    repeating-linear-gradient(25deg,rgba(0,0,0,.2) 0 1px,transparent 1px 3px),
+    radial-gradient(120% 90% at 50% 40%,#1c3772,#091330)}
+.dn::before{content:"";position:absolute;inset:clamp(12px,2vw,28px);border:2px dashed rgba(232,163,61,.55);border-radius:16px}
+.hh{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:10vh;font-size:clamp(3.2rem,13.5vw,13.5rem);font-weight:800;letter-spacing:-.06em;line-height:.88;color:#f2efe8}
+.hh .ser{color:var(--thread);letter-spacing:-.03em}
+.seam{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+.seam line{stroke:#e8a33d;stroke-width:2.5;stroke-dasharray:7 6;vector-effect:non-scaling-stroke}
+.teeth{position:absolute;left:50%;width:18px;transform:translateX(-50%);top:12%;bottom:0;z-index:4;pointer-events:none}
+.teeth::before,.teeth::after{content:"";position:absolute;top:0;bottom:0;width:9px;background:repeating-linear-gradient(180deg,#d3d6dc 0 8px,#6f7581 8px 10px,transparent 10px 20px)}
+.teeth::before{left:0;border-radius:0 3px 3px 0}
+.teeth::after{right:0;background-position:0 10px;border-radius:3px 0 0 3px}
+.puller{position:absolute;left:50%;top:12%;z-index:5;width:46px;margin-left:-23px;transform-origin:50% 0;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(0,0,0,.45))}
+.pl-body{width:46px;height:52px;border-radius:10px 10px 18px 18px;background:linear-gradient(135deg,#f3f4f6,#9aa0aa 55%,#d9dce2)}
+.pl-tab{position:relative;width:30px;height:86px;margin:-6px auto 0;border-radius:6px 6px 16px 16px;background:linear-gradient(135deg,#e7e9ee,#7f8590)}
+.pl-tab::after{content:"";position:absolute;left:50%;top:20px;width:12px;height:32px;border-radius:99px;background:#0b1630;transform:translateX(-50%);opacity:.85}
+.hero .sub{position:absolute;z-index:7;left:var(--gap);bottom:var(--gap);color:#f2efe8;max-width:90vw}
+.hero .sub p{font-size:clamp(1.1rem,2vw,1.8rem);letter-spacing:-.02em;margin:0 0 1.2rem}
+.hero .sub .pill+.pill{margin-left:.5rem}
+.hero .scrl{position:absolute;z-index:7;right:var(--gap);bottom:var(--gap);writing-mode:vertical-rl;color:#f2efe8}
+.badge{position:absolute;z-index:6;right:6vw;top:24vh;width:clamp(90px,12vw,170px);height:auto}
+.badge text{font-size:11.5px;letter-spacing:.17em;fill:#f2efe8;text-transform:uppercase;font-weight:600}
+.badge .c{fill:var(--thread)}
+@media(max-width:700px){.hero .scrl{display:none}.hero .sub{bottom:1.5rem}.badge{top:16vh;right:4vw}}
+
+/* perks marquee */
+.perks{overflow:hidden;white-space:nowrap;padding:1.1rem 0;border-bottom:1px solid color-mix(in srgb,var(--fg) 20%,transparent);position:relative;z-index:3;background:var(--bg)}
+.perks .tr{display:inline-flex;gap:3rem;will-change:transform}
+.perks span{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.perks span::after{content:"✦";color:var(--thread);margin-left:3rem}
+
+/* fits horizontal */
+.hs{height:100vh;overflow:hidden;position:relative}
+.hs .top{position:absolute;top:calc(var(--gap) + 3rem);left:var(--gap);z-index:3}
+.hs-track{display:flex;gap:clamp(16px,3vw,48px);height:100%;align-items:center;padding:0 var(--gap);width:max-content}
+.fit{position:relative;flex:0 0 auto;width:clamp(260px,34vw,520px);height:66vh;margin-top:6vh}
+.fit .im{height:100%;overflow:hidden;border-radius:200px 200px 14px 14px}
+.fit .im img{transform:scale(1.2);transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.fit:hover .im img{transform:scale(1.05)}
+.fit .no{position:absolute;left:-.1em;bottom:-.28em;font-size:clamp(5rem,12vw,11rem);font-weight:800;color:transparent;-webkit-text-stroke:1.5px var(--thread);z-index:2;letter-spacing:-.06em;line-height:1;pointer-events:none}
+.fit h3{position:absolute;right:-.5rem;top:2.5rem;z-index:2;background:var(--fg);color:var(--bg);padding:.5em 1em;border-radius:99px;font-size:.95rem;font-weight:600;white-space:nowrap}
+.fit p{position:absolute;left:0;right:0;bottom:-4rem;font-size:.85rem;opacity:.75;padding-left:1.2em;max-width:32ch}
+.end{flex:0 0 auto;width:42vw;display:flex;align-items:center;font-size:var(--h2);font-weight:700;line-height:.95;letter-spacing:-.04em}
+@media(max-width:800px){.hs{height:auto;overflow:visible;padding:80px 0}.hs .top{position:static;margin:0 var(--gap) 2rem}.hs-track{flex-direction:column;width:auto;height:auto;gap:5.5rem;align-items:stretch}.fit{width:100%;height:60vh;margin:0}.end{width:auto}.fit p{position:static;margin-top:.5rem;padding:0;max-width:none}.fit .no{bottom:-.15em}}
+
+/* express your edge (raw → washed) */
+.wash{height:100vh;position:relative;overflow:hidden}
+.wash .stage{position:absolute;inset:0}
+.wash .layer{position:absolute;inset:0}
+.wash .raw img{filter:brightness(.6) saturate(1.6) contrast(1.1)}
+.wash .fade{clip-path:inset(0 0 0 100%)}
+.wash .fade img{filter:contrast(.95) brightness(1.05)}
+.wash .line{position:absolute;top:0;bottom:0;left:100%;width:3px;background:var(--thread);z-index:4;box-shadow:0 0 30px var(--thread)}
+.wash h2{position:absolute;left:var(--gap);bottom:var(--gap);z-index:5;font-size:var(--h2);font-weight:800;letter-spacing:-.05em;line-height:.9;mix-blend-mode:difference;color:#fff;max-width:12ch}
+.wash .lb{position:absolute;top:22vh;left:var(--gap);z-index:5;mix-blend-mode:difference;color:#fff}
+.wash .ln{position:absolute;left:var(--gap);bottom:calc(var(--gap) + clamp(5rem,14vw,12rem));z-index:5;mix-blend-mode:difference;color:#fff;max-width:28ch}
+.wash .layer img.bg{position:absolute;inset:0;opacity:0}
+.wash .layer img.bg:first-child{opacity:1}
+.pcs{position:absolute;right:var(--gap);bottom:var(--gap);z-index:6;width:clamp(190px,21vw,300px);aspect-ratio:1/1.55;touch-action:pan-y}
+.pnav{position:absolute;right:0;top:-3.4rem;display:flex;gap:.5rem;z-index:10}
+.pnav button{width:46px;height:38px;border:0;border-radius:6px;background:#f2efe8;color:#0b1630;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:.3s}
+.pnav button:hover{background:var(--thread)}
+.pc{position:absolute;inset:0;background:#f2efe8;color:#0b1630;border-radius:6px;padding:.7rem;box-shadow:0 20px 50px rgba(0,0,0,.35);font-size:.85rem;display:flex;flex-direction:column;will-change:transform;user-select:none}
+.pc .im{flex:1;overflow:hidden;position:relative;margin-bottom:.8rem;min-height:0}
+.pc .im img{pointer-events:none}
+.pc a{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.85}
+.pc a:hover{color:var(--red)}
+.pc b{display:block;font-weight:500;margin-top:.3rem}
+.hrt{position:absolute;top:.5rem;right:.5rem;width:34px;height:34px;border-radius:50%;border:0;background:#fff;color:#0b1630;font-size:1.05rem;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15);transition:.3s}
+.hrt.on{background:var(--red);color:#fff}
+@media(max-width:700px){.wash .ln{display:none}}
+
+/* products list */
+.list{padding:clamp(70px,10vw,160px) var(--gap)}
+.list .hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:1rem}
+.list h2{font-size:var(--h2);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.row{display:grid;grid-template-columns:3rem 1fr auto;gap:1rem;align-items:center;padding:clamp(1.2rem,2.6vw,2.4rem) 0;border-top:1px solid color-mix(in srgb,var(--fg) 25%,transparent);position:relative;cursor:pointer;transition:padding .5s cubic-bezier(.2,.7,.2,1),color .3s}
+.row:last-child{border-bottom:1px solid color-mix(in srgb,var(--fg) 25%,transparent)}
+.row .t{font-size:clamp(1.2rem,3.2vw,3rem);font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.row .t small{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;opacity:.55;font-weight:500;margin-bottom:.4rem}
+.row .p{font-size:clamp(1rem,1.6vw,1.5rem)}
+.row .th{display:none;width:90px;height:120px;border-radius:8px;overflow:hidden;grid-column:2/3}
+@media(hover:hover){.row:hover{padding-left:2rem;color:var(--thread)}}
+@media(hover:none){.row .th{display:block}}
+.float{position:fixed;left:0;top:0;width:clamp(180px,20vw,300px);aspect-ratio:3/4;z-index:55;pointer-events:none;border-radius:14px;overflow:hidden;opacity:0;transform:scale(.6)}
+.float img{position:absolute;inset:0}
+@media(hover:none){.float{display:none}}
+
+/* categories */
+.cats{display:flex;height:100vh;min-height:520px}
+.cat{flex:1;position:relative;overflow:hidden;transition:flex .9s cubic-bezier(.2,.7,.2,1);color:#fff;display:block}
+.cat:hover{flex:1.7}
+.cat .im{position:absolute;inset:0}
+.cat .im img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1);transform:scale(1.15)}
+.cat:hover .im img{transform:scale(1.02)}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,11,26,.65),transparent 55%)}
+.cat .t{position:absolute;left:var(--gap);bottom:var(--gap);z-index:2}
+.cat h3{font-size:clamp(3rem,11vw,10rem);font-weight:800;letter-spacing:-.07em;line-height:.85;color:transparent;-webkit-text-stroke:1.5px #fff;transition:.5s}
+.cat:hover h3{color:#fff}
+.cat .link{margin-top:1rem;display:inline-block}
+@media(max-width:700px){.cats{flex-direction:column;height:auto}.cat{height:70vh;flex:none}.cat:hover{flex:none}}
+
+/* north to south journey */
+.ns{position:relative;height:100vh;min-height:620px;overflow:hidden}
+.nwrd{position:absolute;left:0;right:0;top:0;height:200%;z-index:0;pointer-events:none;will-change:transform}
+.nwrd div{height:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(5rem,27vw,30rem);font-weight:800;letter-spacing:-.07em;line-height:1;color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--fg) 30%,transparent)}
+.nh{position:absolute;z-index:4;top:calc(var(--gap) + 4rem);left:50%;transform:translateX(-50%);font-size:clamp(.8rem,1.4vw,1.1rem);letter-spacing:.3em;text-transform:uppercase;font-weight:600;white-space:nowrap}
+.ncen{position:absolute;left:50%;top:52%;width:min(58vh,78vw);aspect-ratio:1;transform:translate(-50%,-50%);z-index:2}
+.ncen .arch{position:absolute;inset:15%;border-radius:999px 999px 16px 16px;overflow:hidden}
+.ncen .arch img{transform:scale(1.35);will-change:transform}
+.ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ring line{stroke:var(--fg);stroke-width:.35;opacity:.7}
+.ring circle{fill:none;stroke:var(--fg);stroke-width:.3;opacity:.5}
+.ring text{fill:var(--thread);font-size:5px;font-weight:700;text-anchor:middle;letter-spacing:.1em}
+.ptr{position:absolute;left:50%;top:-1.2rem;width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:16px solid var(--thread);transform:translateX(-50%);z-index:3}
+.nrule{position:absolute;left:var(--gap);top:22vh;bottom:14vh;width:1px;background:color-mix(in srgb,var(--fg) 30%,transparent);z-index:3}
+.nrule .nd{position:absolute;left:-5px;top:0;width:11px;height:11px;border-radius:50%;background:var(--thread);box-shadow:0 0 18px var(--thread)}
+.nrule .a,.nrule .b{position:absolute;left:1rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+.nrule .a{top:-.4rem}.nrule .b{bottom:-.4rem}
+.ncopy{position:absolute;right:var(--gap);top:52%;transform:translateY(-50%);width:min(30vw,400px);z-index:4}
+.ncopy .st{position:absolute;right:0;top:50%;transform:translateY(-50%);width:100%}
+.st .big{font-size:clamp(1.6rem,3.2vw,3.2rem);font-weight:700;letter-spacing:-.04em;line-height:1.05}
+.st .big .ser{color:var(--thread)}
+.st p{font-size:clamp(1.1rem,1.8vw,1.7rem);letter-spacing:-.02em;line-height:1.25}
+.st .ul{margin-top:1.2rem}
+@media(max-width:800px){
+  .ncen{top:38%;width:min(46vh,70vw)}
+  .ncopy{top:auto;bottom:7vh;left:var(--gap);right:var(--gap);width:auto;transform:none;height:24vh}
+  .ncopy .st{top:0;transform:none}
+  .nh{top:calc(var(--gap) + 3.4rem)}
+  .nrule{top:20vh;bottom:30vh}
+}
+
+/* lookbook */
+.look{position:relative;margin:0 var(--gap);height:130vh;min-height:600px;border-radius:24px;overflow:hidden}
+.look .im{position:absolute;inset:0}
+.dot{position:absolute;width:46px;height:46px;border:0;border-radius:50%;background:#171717;color:#fff;display:grid;place-items:center;z-index:2;cursor:pointer;font:inherit;box-shadow:0 0 0 7px rgba(255,255,255,.28);transition:background .3s,color .3s,box-shadow .3s}
+.dot::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid #fff;animation:ping 2s infinite;pointer-events:none}
+.dot .pl{display:block;font-size:1.6rem;line-height:1;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.dot.open{background:#fff;color:#111;z-index:6;box-shadow:0 0 0 0 transparent}
+.dot.open::before{animation:none;opacity:0}
+.dot.open .pl{transform:rotate(45deg)}
+.pop{position:absolute;z-index:3;top:calc(100% + 16px);left:50%;width:min(320px,72vw);background:#fff;color:#555;border-radius:6px;padding:1.7rem 1.8rem 2rem;box-shadow:0 20px 50px rgba(0,0,0,.28);text-align:left;opacity:0;visibility:hidden;pointer-events:none;cursor:default;font-size:1rem;line-height:1.4}
+.dot.open .pop{pointer-events:auto}
+.pop .ck{display:block;width:26px;height:26px;stroke:#555;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin-bottom:1.1rem}
+.pop .t{display:block;font-size:1.05rem;font-weight:500;color:#555;margin-bottom:.7rem}
+.pop .d{display:block;font-size:.82rem;color:#777;line-height:1.6}
+@keyframes ping{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.2);opacity:0}}
+
+/* statement */
+.mani{padding:clamp(80px,14vw,220px) var(--gap)}
+.mani h2{font-size:clamp(2rem,7vw,7rem);font-weight:800;letter-spacing:-.05em;line-height:.95;text-transform:uppercase;margin-bottom:2rem;max-width:12em}
+.mani h2 .ser{text-transform:none;color:var(--thread)}
+.mani p{font-size:clamp(1.4rem,3.6vw,3.4rem);line-height:1.12;font-weight:500;letter-spacing:-.03em;max-width:20em;margin-bottom:1.5rem}
+.mani .w{opacity:.14;display:inline-block;margin-right:.22em}
+
+/* craft */
+.craft{padding:0 var(--gap) clamp(60px,8vw,120px);display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.craft .im{aspect-ratio:4/3;border-radius:14px;overflow:hidden;margin-bottom:1.2rem}
+.craft .im img{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.craft a:hover .im img{transform:scale(1.08)}
+.craft h4{font-size:clamp(1.3rem,2.6vw,2.4rem);font-weight:600;letter-spacing:-.03em;margin-bottom:.5rem}
+.craft .c2{margin-top:8vw}
+@media(max-width:700px){.craft{grid-template-columns:1fr}.craft .c2{margin-top:0}}
+
+/* reviews stack */
+.stack{padding:0 var(--gap) 14vh;position:relative}
+.stack h2{font-size:var(--h2);font-weight:800;letter-spacing:-.05em;margin-bottom:3rem}
+.card{position:sticky;top:12vh;height:66vh;border-radius:24px;padding:clamp(1.2rem,3vw,3rem);margin-bottom:6vh;display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center;overflow:hidden;transform-origin:center top}
+.card:nth-of-type(1){background:#e8a33d;color:#0b1630}
+.card:nth-of-type(2){background:#d62027;color:#fff}
+.card q{font-size:clamp(1.3rem,3vw,2.8rem);line-height:1.1;font-weight:600;letter-spacing:-.03em;quotes:none;display:block}
+.card .by{margin-top:1.5rem;font-size:.85rem}
+.card .st{letter-spacing:.2em;margin-bottom:1rem}
+.card .im{height:100%;border-radius:14px;overflow:hidden;position:relative}
+.card .cap{position:absolute;left:1rem;bottom:1rem;background:#f2efe8;color:#0b1630;padding:.5em 1.1em;border-radius:99px;font-size:.8rem;font-weight:600}
+.card .vb{display:inline-block;background:rgba(255,255,255,.2);padding:.2em .8em;border-radius:99px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+@media(max-width:700px){.card{grid-template-columns:1fr;height:auto;min-height:70vh}.card .im{height:34vh}}
+
+/* magazine */
+.mag{padding:clamp(60px,9vw,140px) var(--gap)}
+.mag h2{font-size:var(--h2);font-weight:800;letter-spacing:-.05em;margin-bottom:3rem}
+.mag .g{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.mag .a:nth-child(2){margin-top:6vw}
+.mag .a:nth-child(3){margin-top:12vw}
+.mag .im{aspect-ratio:4/5;overflow:hidden;border-radius:14px;margin-bottom:1rem}
+.mag .im img{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.mag .a:hover .im img{transform:scale(1.08)}
+.mag small{opacity:.6;letter-spacing:.12em;text-transform:uppercase;font-size:.7rem}
+.mag h5{font-size:clamp(1.2rem,2vw,1.8rem);font-weight:600;letter-spacing:-.03em;margin:.3rem 0 .5rem}
+.mag p{opacity:.75;font-size:.9rem}
+@media(max-width:800px){.mag .g{grid-template-columns:1fr}.mag .a:nth-child(n){margin-top:0}}
+
+/* insta marquee */
+.insta{overflow:hidden;padding:2rem 0}
+.insta .tr{display:inline-flex;gap:1rem;white-space:nowrap;will-change:transform}
+.insta .it{width:clamp(180px,22vw,340px);aspect-ratio:1/1.15;border-radius:12px;overflow:hidden;position:relative;flex:none}
+.insta .it .ov{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:rgba(11,22,48,.55);color:#fff;font-weight:800;font-size:1.6rem;letter-spacing:-.03em;line-height:1;padding:1rem;white-space:normal}
+
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:3rem var(--gap);text-align:center;font-size:.95rem}
+.trust svg{width:34px;height:34px;stroke:var(--thread);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto .8rem;display:block}
+@media(max-width:700px){.trust{grid-template-columns:repeat(2,1fr);row-gap:2rem}}
+
+/* brand mega */
+.brand{overflow:hidden;padding:2rem 0 0}
+.brand .big{display:inline-flex;gap:.3em;font-size:clamp(4rem,22vw,22rem);font-weight:800;letter-spacing:-.07em;line-height:.85;white-space:nowrap}
+.brand .big span:nth-child(even){font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--thread);letter-spacing:-.04em}
+
+/* footer */
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 2fr;gap:2rem;padding:clamp(40px,6vw,90px) var(--gap) 3rem;font-size:.9rem}
+.foot h6{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;opacity:.55;margin-bottom:1rem;font-weight:500}
+.foot a.l{display:block;margin-bottom:.45rem;opacity:.85;transition:.3s}
+.foot a.l:hover{color:var(--thread);transform:translateX(5px)}
+.foot .soc{display:flex;gap:1rem;margin-top:1.2rem}
+.foot .soc a{width:36px;height:36px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center;font-size:.7rem;transition:.3s}
+.foot .soc a:hover{background:var(--fg);color:var(--bg)}
+.mail{display:flex;border-bottom:1px solid currentColor;margin:1rem 0 1.5rem}
+.mail input{flex:1;background:none;border:0;color:inherit;padding:.7rem 0;outline:0;font:inherit}
+.mail button{background:none;border:0;color:inherit;font-size:1.2rem;cursor:pointer}
+.foot address{font-style:normal;opacity:.8;line-height:1.5;margin-top:.5rem}
+@media(max-width:800px){.foot{grid-template-columns:1fr 1fr}.foot>div:first-child,.foot>div:last-child{grid-column:1/-1}}
+.cur{position:fixed;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--thread);z-index:90;pointer-events:none;mix-blend-mode:difference;opacity:0}
+@media(hover:none){.cur{display:none}}
+</style>
+</head>
+<body>
+
+<div class="cur"></div>
+
+<div class="load">
+  <span class="tag">Breaking in your denim…</span>
+  <div><div class="n"><span id="cnt">0</span></div><div class="bar"></div></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="under"><img src="https://picsum.photos/seed/mxhero/1800/1200" alt=""></div>
+  <div class="dn dl"><h1 class="hh"><span class="mask"><span class="ln l1">Denim, the</span></span><span class="mask"><span class="ln l2"><span class="ser">mexico</span> way</span></span></h1></div>
+  <div class="dn dr"><div class="hh" aria-hidden="true"><span class="mask"><span class="ln l1">Denim, the</span></span><span class="mask"><span class="ln l2"><span class="ser">mexico</span> way</span></span></div></div>
+  <svg class="seam" viewBox="0 0 100 100" preserveAspectRatio="none"><line id="sL" x1="50" y1="0" x2="50" y2="12"/><line id="sR" x1="50" y1="0" x2="50" y2="12"/></svg>
+  <div class="teeth"></div>
+  <div class="puller"><div class="pl-body"></div><div class="pl-tab"></div></div>
+  <svg class="badge" viewBox="0 0 100 100"><defs><path id="cir" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text><textPath href="#cir">Proudly made in India ✦ Everyday comfort ✦ Free shipping ✦</textPath></text><circle class="c" cx="50" cy="50" r="5"/></svg>
+  <div class="sub">
+    <p>The new denim standard.</p>
+    <a class="pill fill" href="#">Shop now</a><a class="pill" href="#">Limited Edition</a>
+  </div>
+  <div class="scrl tag">Scroll to unzip</div>
+</section>
+
+<div class="perks"><div class="tr" id="perks">
+  <span>Free Shipping Across India</span><span>Designed for Everyday Comfort</span><span>Proudly Made in India</span>
+  <span>Free Shipping Across India</span><span>Designed for Everyday Comfort</span><span>Proudly Made in India</span>
+  <span>Free Shipping Across India</span><span>Designed for Everyday Comfort</span><span>Proudly Made in India</span>
+  <span>Free Shipping Across India</span><span>Designed for Everyday Comfort</span><span>Proudly Made in India</span>
+</div></div>
+
+<!-- FITS -->
+<section class="hs">
+  <div class="top"><span class="tag">Pick your fit</span></div>
+  <div class="hs-track">
+    <div class="fit"><div class="im"><img src="https://picsum.photos/seed/f1/800/1100" alt="Classic Slim Fit"></div><span class="no">01</span><h3>Classic Slim Fit</h3><p>Made for days you don't need a dress code. The pair you'll live in.</p></div>
+    <div class="fit"><div class="im"><img src="https://picsum.photos/seed/f2/800/1100" alt="Everyday Comfort Fit"></div><span class="no">02</span><h3>Everyday Comfort Fit</h3><p>The art of an easy fit. <i>Comfortable from morning to night.</i></p></div>
+    <div class="fit"><div class="im"><img src="https://picsum.photos/seed/f3/800/1100" alt="Cargos"></div><span class="no">03</span><h3>Cargos</h3><p>Way functional. Way effortless. And way, way good-looking.</p></div>
+    <div class="end"><span>Find your <span class="ser" style="color:var(--thread)">pair</span> →</span></div>
+  </div>
+</section>
+
+<!-- EXPRESS YOUR EDGE -->
+<section class="wash">
+  <div class="stage">
+    <div class="layer raw">
+      <img class="bg" src="https://picsum.photos/seed/edge1/1800/1200" alt="">
+      <img class="bg" src="https://picsum.photos/seed/edge3/1800/1200" alt="">
+      <img class="bg" src="https://picsum.photos/seed/edge5/1800/1200" alt="">
+    </div>
+    <div class="layer fade">
+      <img class="bg" src="https://picsum.photos/seed/edge2/1800/1200?grayscale" alt="">
+      <img class="bg" src="https://picsum.photos/seed/edge4/1800/1200?grayscale" alt="">
+      <img class="bg" src="https://picsum.photos/seed/edge6/1800/1200?grayscale" alt="">
+    </div>
+    <div class="line"></div>
+  </div>
+  <span class="lb tag">Limited Edition</span>
+  <p class="ln">Denim that moves the way you do.</p>
+  <h2>Express your <span class="ser">edge</span></h2>
+  <div class="pcs">
+    <div class="pnav"><button class="prev" aria-label="Previous">&#8249;</button><button class="next" aria-label="Next">&#8250;</button></div>
+    <div class="pc"><div class="im"><img src="https://picsum.photos/seed/edgec1/400/540" alt=""><button class="hrt" aria-label="Wishlist">♡</button></div><a href="#">Men's Classic Slim Fit Stretch Black Jeans</a><b>₹ 1,899.00</b></div>
+    <div class="pc"><div class="im"><img src="https://picsum.photos/seed/edgec2/400/540" alt=""><button class="hrt" aria-label="Wishlist">♡</button></div><a href="#">Men's Everyday Comfort Fit Indigo Jeans</a><b>₹ 1,799.00</b></div>
+    <div class="pc"><div class="im"><img src="https://picsum.photos/seed/edgec3/400/540" alt=""><button class="hrt" aria-label="Wishlist">♡</button></div><a href="#">Men's Premium Comfort Fit Black Jeans</a><b>₹ 1,799.00</b></div>
+  </div>
+</section>
+
+<!-- EVERYDAY ESSENTIALS -->
+<section class="list">
+  <div class="hd">
+    <h2><span class="mask"><span class="el">Everyday</span></span><span class="mask"><span class="el ser">essentials</span></span></h2>
+    <a href="#" class="ul">View all</a>
+  </div>
+  <div id="rows">
+    <a href="#" class="row" data-img="https://picsum.photos/seed/p1/600/800"><span class="tag">01</span><span class="t"><small>Mexico Jeans</small>Men's Everyday Comfort Fit Stretch Indigo Jeans</span><span class="p">₹1,799.00</span><div class="th"><img src="https://picsum.photos/seed/p1/200/260" alt=""></div></a>
+    <a href="#" class="row" data-img="https://picsum.photos/seed/p2/600/800"><span class="tag">02</span><span class="t"><small>Mexico Jeans</small>Men's Premium Comfort Fit Stretch Black Jeans</span><span class="p">₹1,799.00</span><div class="th"><img src="https://picsum.photos/seed/p2/200/260" alt=""></div></a>
+    <a href="#" class="row" data-img="https://picsum.photos/seed/p3/600/800"><span class="tag">03</span><span class="t"><small>Mexico Jeans</small>Men's Classic Slim Fit Stretch Cream Jeans</span><span class="p">₹1,899.00</span><div class="th"><img src="https://picsum.photos/seed/p3/200/260" alt=""></div></a>
+  </div>
+</section>
+<div class="float"><img alt=""></div>
+
+<!-- JEANS / CARGO -->
+<section class="cats">
+  <a href="#" class="cat"><div class="im"><img src="https://picsum.photos/seed/cat1/1000/1300" alt=""></div><div class="t"><h3>Jeans</h3><span class="link ul">Shop now</span></div></a>
+  <a href="#" class="cat"><div class="im"><img src="https://picsum.photos/seed/cat2/1000/1300" alt=""></div><div class="t"><h3>Cargo</h3><span class="link ul">Shop now</span></div></a>
+</section>
+
+<!-- NORTH TO SOUTH -->
+<section class="ns">
+  <div class="nwrd"><div>NORTH</div><div>SOUTH</div></div>
+  <h2 class="nh">From north to south</h2>
+  <div class="nrule"><span class="a">N</span><span class="nd"></span><span class="b">S</span></div>
+  <div class="ncen">
+    <span class="ptr"></span>
+    <svg class="ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49"/><circle cx="50" cy="50" r="40"/><g id="ticks"></g><text x="50" y="11">N</text><text x="91" y="52">E</text><text x="50" y="94">S</text><text x="9" y="52">W</text></svg>
+    <div class="arch"><img src="https://picsum.photos/seed/ns/800/1000" alt=""></div>
+  </div>
+  <div class="ncopy">
+    <div class="st"><div class="big">You've found us out there, <span class="ser">now find us here.</span></div></div>
+    <div class="st"><p>From stores across India to your screen Mexico Jeans is making its way closer to you.</p></div>
+    <div class="st"><p>For the first time, shop Mexico directly online.</p><a href="#" class="ul">Shop the collection</a></div>
+  </div>
+</section>
+
+<!-- LOOKBOOK -->
+<section style="padding:clamp(40px,6vw,100px) 0">
+  <div class="look">
+    <div class="im"><img src="https://picsum.photos/seed/look/1600/1900" alt=""></div>
+<button class="dot" aria-expanded="false" aria-label="Soft feel, strong denim" style="left:26%;top:26%"><span class="pl">+</span><span class="pop" role="dialog"><svg class="ck" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l3 3 5-6"/></svg><span class="t">Soft Feel. Strong Denim.</span><span class="d">Premium denim with just the right amount of stretch — soft enough for all-day wear, structured enough to keep its shape.</span></span></button>
+    <button class="dot" aria-expanded="false" aria-label="Designed to fit" style="left:52%;top:44%"><span class="pl">+</span><span class="pop" role="dialog"><svg class="ck" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l3 3 5-6"/></svg><span class="t">Designed to Fit.</span><span class="d">Built for comfort. Cut to look fitted, yet feel easy throughout the day.</span></span></button>
+    <button class="dot" aria-expanded="false" aria-label="Made to be worn on repeat" style="left:44%;top:72%"><span class="pl">+</span><span class="pop" role="dialog"><svg class="ck" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l3 3 5-6"/></svg><span class="t">Made to Be Worn on Repeat.</span><span class="d">Everyday jeans that keep their colour and shape, wash after wash.</span></span></button>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="mani">
+  <h2><span class="mask"><span class="el">Your next favourite</span></span><span class="mask"><span class="el">pair <span class="ser">starts here.</span></span></span></h2>
+  <p class="rv">Built for comfort. Designed to fit. Made to be worn on repeat.</p>
+  <p class="rv">See what makes a Mexico pair worth reaching for.</p>
+</section>
+
+<!-- CRAFT -->
+<section class="craft">
+  <a href="#" class="c1"><div class="im"><img src="https://picsum.photos/seed/cr1/900/680" alt=""></div><h4>The craft behind every pair.</h4><span class="ul">Explore Our Denim</span></a>
+  <a href="#" class="c2"><div class="im"><img src="https://picsum.photos/seed/cr2/900/680" alt=""></div><h4>Denim, without the compromise</h4><span class="ul">Find your pair</span></a>
+</section>
+
+<!-- REVIEWS -->
+<section class="stack">
+  <h2>From the <span class="ser" style="color:var(--thread)">people</span></h2>
+  <div class="card">
+    <div><div class="st">★★★★★</div><q>These are probably the best slim-fit jeans I've worn. They look fitted but still feel comfortable throughout the day.</q><div class="by">— Aditya A. / Coimbatore</div></div>
+    <div class="im"><img src="https://picsum.photos/seed/r1/700/900" alt=""><a href="#" class="cap">Shop the indigo jeans</a></div>
+  </div>
+  <div class="card">
+    <div><span class="vb">Verified Buyer</span><div class="st">★★★★★</div><q>Awesome product value of money</q><div class="by">— Chandragowda<br>Men's Premium Comfort Fit Stretch…</div></div>
+    <div class="im"><img src="https://picsum.photos/seed/r2/700/900" alt=""></div>
+  </div>
+</section>
+
+<!-- MAGAZINE -->
+<section class="mag">
+  <h2>Magazine</h2>
+  <div class="g">
+    <a href="#" class="a"><div class="im"><img src="https://picsum.photos/seed/m1/800/1000" alt=""></div><small>August 18, 2026</small><h5>The Idea of Denim</h5><p>From blues and fades to indigo and rivets, explore the history behind one of fashion's most enduring fabrics.</p></a>
+    <a href="#" class="a"><div class="im"><img src="https://picsum.photos/seed/m2/800/1000" alt=""></div><small>August 18, 2026</small><h5>Denim Care 101</h5><p>A simple guide to washing your jeans less, caring for them better, and keeping them looking good for longer.</p></a>
+    <a href="#" class="a"><div class="im"><img src="https://picsum.photos/seed/m3/800/1000" alt=""></div><small>August 18, 2026</small><h5>Raw &amp; Washed</h5><p>Raw or washed? Discover how different denim finishes shape the colour, feel and character of your pair.</p></a>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="insta"><div class="tr" id="insta">
+  <div class="it"><img src="https://picsum.photos/seed/i1/400/460" alt=""><div class="ov">WEBSITE<br>NOW LIVE!</div></div>
+  <div class="it"><img src="https://picsum.photos/seed/i2/400/460" alt=""></div>
+  <div class="it"><img src="https://picsum.photos/seed/i3/400/460" alt=""><div class="ov">mexico<br>jeans</div></div>
+  <div class="it"><img src="https://picsum.photos/seed/i4/400/460" alt=""></div>
+  <div class="it"><img src="https://picsum.photos/seed/i5/400/460" alt=""></div>
+  <div class="it"><img src="https://picsum.photos/seed/i6/400/460" alt=""></div>
+  <div class="it"><img src="https://picsum.photos/seed/i1/400/460" alt=""><div class="ov">WEBSITE<br>NOW LIVE!</div></div>
+  <div class="it"><img src="https://picsum.photos/seed/i2/400/460" alt=""></div>
+  <div class="it"><img src="https://picsum.photos/seed/i3/400/460" alt=""><div class="ov">mexico<br>jeans</div></div>
+  <div class="it"><img src="https://picsum.photos/seed/i4/400/460" alt=""></div>
+  <div class="it"><img src="https://picsum.photos/seed/i5/400/460" alt=""></div>
+  <div class="it"><img src="https://picsum.photos/seed/i6/400/460" alt=""></div>
+</div></section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="tf"><svg viewBox="0 0 24 24"><path d="M1 6h13v10H1zM14 9h4l4 3v4h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>Free shipping<br>on all orders</div>
+  <div class="tf"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9M3 4v5h5"/></svg>5 Days easy return</div>
+  <div class="tf"><svg viewBox="0 0 24 24"><path d="M3 12l9-9h9v9l-9 9zM16 8h.01"/></svg>Secure Payments</div>
+  <div class="tf"><svg viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 10c0 6-8 11-8 11z"/></svg>Quick Support</div>
+</section>
+
+<section class="brand"><div class="big" id="big"><span>mexico</span><span>jeans</span><span>mexico</span><span>jeans</span></div></section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const mm=gsap.matchMedia();
+
+/* smooth scroll */
+const lenis=new Lenis({duration:1.25,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+lenis.stop();
+
+/* announcement bar hides, header slides up */
+let annHidden=false;
+lenis.on('scroll',({scroll})=>{
+  const hide=scroll>60;
+  if(hide!==annHidden){
+    annHidden=hide;
+    gsap.to('.ann',{yPercent:hide?-100:0,duration:.4,ease:'power3.out'});
+    gsap.to('.head',{top:hide?0:34,duration:.4,ease:'power3.out'});
+  }
+});
+
+/* loader → intro */
+const cnt={v:0},cntEl=document.getElementById('cnt');
+gsap.timeline({onComplete:()=>lenis.start()})
+ .to(cnt,{v:100,duration:2,ease:'power2.inOut',onUpdate:()=>cntEl.textContent=Math.round(cnt.v)})
+ .to('.load .bar',{scaleX:1,duration:2,ease:'power2.inOut'},0)
+ .to('.load',{yPercent:-100,duration:1.1,ease:'power4.inOut'})
+ .from('.hero .l1',{yPercent:115,duration:1.2,ease:'power4.out'},'-=.5')
+ .from('.hero .l2',{yPercent:115,duration:1.2,ease:'power4.out'},'-=1.05')
+ .from('.puller',{y:-180,duration:1.3,ease:'bounce.out'},'-=.9')
+ .from('.badge',{scale:0,rotate:-120,duration:1.2,ease:'back.out(1.6)'},'-=.9')
+ .from('.hero .sub > *',{y:24,opacity:0,stagger:.1,duration:.8},'-=.8');
+gsap.to('.puller',{rotation:5,duration:1.4,yoyo:true,repeat:-1,ease:'sine.inOut'});
+
+/* hero: scroll unzips the denim */
+const zp={p:0};
+const dL=document.querySelector('.dl'),dR=document.querySelector('.dr'),pul=document.querySelector('.puller'),teeth=document.querySelector('.teeth'),sL=document.getElementById('sL'),sR=document.getElementById('sR');
+const seam=document.querySelector('.seam'),fadeEls=[...document.querySelectorAll('.badge,.scrl')];
+function drawZip(){
+  const T=50*zp.p,py=12+88*zp.p;
+  dL.style.clipPath=`polygon(0 0,${50-T}% 0,50% ${py}%,50% 100%,0 100%)`;
+  dR.style.clipPath=`polygon(${50+T}% 0,100% 0,100% 100%,50% 100%,50% ${py}%)`;
+  pul.style.top=`calc(${py}% - 26px)`;
+  teeth.style.top=py+'%';
+  sL.setAttribute('x1',50-T);sL.setAttribute('y2',py);
+  sR.setAttribute('x1',50+T);sR.setAttribute('y2',py);
+  /* zipper parts: scroll position se opacity (reverse scroll par hamesha wapas dikhe) */
+  const zf=Math.min(1,Math.max(0,1-(zp.p-.9)/.1));
+  pul.style.opacity=zf;teeth.style.opacity=zf;seam.style.opacity=zf;
+  const bf=Math.min(1,Math.max(0,1-zp.p/.3));
+  fadeEls.forEach(el=>el.style.opacity=bf);
+}
+drawZip();
+gsap.timeline({scrollTrigger:{trigger:'.hero',start:'top top',end:'+=170%',pin:true,scrub:1}})
+ .to(zp,{p:1,ease:'none',duration:1,onUpdate:drawZip},0)
+ .to('.under img',{scale:1,ease:'none',duration:1.3},0)
+ .to('.dl',{xPercent:-60,ease:'power1.in',duration:.35},1)
+ .to('.dr',{xPercent:60,ease:'power1.in',duration:.35},1);
+gsap.to('.badge text',{rotation:360,duration:20,repeat:-1,ease:'none',svgOrigin:'50 50'});
+
+/* perks marquee */
+gsap.to('#perks',{xPercent:-25,duration:16,ease:'none',repeat:-1});
+
+/* headings mask reveal */
+gsap.utils.toArray('.el').forEach(el=>gsap.from(el,{yPercent:115,duration:1.2,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 92%'}}));
+
+/* fits */
+mm.add('(min-width:801px)',()=>{
+  const tr=document.querySelector('.hs-track');
+  const dist=()=>tr.scrollWidth-window.innerWidth;
+  gsap.to(tr,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'.hs',start:'top top',end:()=>'+='+dist(),pin:true,scrub:1,invalidateOnRefresh:true}});
+  gsap.utils.toArray('.fit .im img').forEach(im=>gsap.fromTo(im,{xPercent:-8},{xPercent:8,ease:'none',scrollTrigger:{trigger:'.hs',start:'top top',end:()=>'+='+dist(),scrub:true}}));
+});
+mm.add('(max-width:800px)',()=>{
+  gsap.utils.toArray('.fit').forEach(f=>gsap.from(f,{y:80,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:f,start:'top 88%'}}));
+});
+
+/* page colour: raw indigo → washed (during "Express your edge") */
+gsap.timeline({scrollTrigger:{trigger:'.wash',start:'top 60%',end:'bottom 40%',scrub:true}})
+ .to(document.documentElement,{'--bg':'#e6ecf3','--fg':'#0b1630',ease:'none'});
+
+/* express your edge: wipe */
+gsap.timeline({scrollTrigger:{trigger:'.wash',start:'top top',end:'+=120%',pin:true,scrub:1}})
+ .fromTo('.wash .fade',{clipPath:'inset(0 0 0 100%)'},{clipPath:'inset(0 0 0 0%)',ease:'none'},0)
+ .fromTo('.wash .line',{left:'100%'},{left:'0%',ease:'none'},0)
+ .fromTo('.wash .raw img',{scale:1.2},{scale:1,ease:'none'},0)
+ .fromTo('.pcs',{y:120,rotate:6,opacity:0},{y:0,rotate:0,opacity:1,ease:'none',duration:.4},0.5)
+ .to('.wash .line',{opacity:0,duration:.05},0.95);
+
+/* express your edge: product slider (stacked cards + background swap) */
+(function(){
+  const cards=[...document.querySelectorAll('.pcs .pc')],n=cards.length;
+  const raws=[...document.querySelectorAll('.wash .raw .bg')],fades=[...document.querySelectorAll('.wash .fade .bg')];
+  const ys=[0,10,18],rs=[0,-2.5,2.5],ss=[1,.965,.93];
+  let active=0,busy=false;
+  const props=d=>({x:0,y:ys[d],rotate:rs[d],scale:ss[d],opacity:1,zIndex:n-d});
+  cards.forEach((c,i)=>gsap.set(c,props(i)));
+  function swapBg(from,to){
+    [raws,fades].forEach(set=>{
+      gsap.to(set[from],{opacity:0,duration:.9,ease:'power2.out'});
+      gsap.to(set[to],{opacity:1,duration:.9,ease:'power2.out'});
+    });
+  }
+  function place(tl,pos,dur){
+    cards.forEach((c,i)=>{const d=(i-active+n)%n;tl.to(c,{...props(d),duration:dur,ease:'power3.out',overwrite:'auto'},pos)});
+  }
+  function go(dir){
+    if(busy)return;busy=true;
+    const old=active;active=(active+dir+n)%n;
+    swapBg(old,active);
+    const tl=gsap.timeline({onComplete:()=>busy=false});
+    if(dir===1){
+      tl.to(cards[old],{x:-90,rotate:-12,opacity:0,duration:.35,ease:'power2.in'});
+      place(tl,'>',.6);
+    }else{
+      gsap.set(cards[active],{x:-90,rotate:-12,opacity:0,zIndex:n+1});
+      place(tl,0,.6);
+    }
+  }
+  document.querySelector('.pcs .next').addEventListener('click',()=>go(1));
+  document.querySelector('.pcs .prev').addEventListener('click',()=>go(-1));
+  /* swipe */
+  const box=document.querySelector('.pcs');let sx=null;
+  box.addEventListener('pointerdown',e=>{sx=e.clientX});
+  window.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40)go(dx<0?1:-1)});
+  /* wishlist */
+  document.querySelectorAll('.hrt').forEach(h=>h.addEventListener('click',e=>{
+    e.preventDefault();h.classList.toggle('on');h.textContent=h.classList.contains('on')?'♥':'♡';
+    gsap.fromTo(h,{scale:.6},{scale:1,duration:.6,ease:'elastic.out(1,.4)'});
+  }));
+  /* autoplay while section is in view */
+  let auto;
+  ScrollTrigger.create({trigger:'.wash',start:'top top',end:'+=120%',
+    onEnter:()=>{auto=setInterval(()=>go(1),4500)},onEnterBack:()=>{auto=setInterval(()=>go(1),4500)},
+    onLeave:()=>clearInterval(auto),onLeaveBack:()=>clearInterval(auto)});
+})();
+
+/* products hover float */
+const fl=document.querySelector('.float'),fi=fl.querySelector('img');
+const fx=gsap.quickTo(fl,'x',{duration:.6,ease:'power3'}),fy=gsap.quickTo(fl,'y',{duration:.6,ease:'power3'}),fr=gsap.quickTo(fl,'rotation',{duration:.5,ease:'power3'});
+let lx=0;
+let mx=-1,my=-1,curRow=null,shown=false;
+function showFor(r){
+  if(r===curRow)return;
+  curRow=r;
+  if(r){
+    fi.src=r.dataset.img;
+    if(!shown){shown=true;gsap.to(fl,{opacity:1,scale:1,duration:.5,ease:'back.out(1.6)',overwrite:'auto'})}
+  }else if(shown){
+    shown=false;gsap.to(fl,{opacity:0,scale:.6,duration:.3,overwrite:'auto'});
+  }
+}
+/* image sirf tab dikhe jab cursor ke neeche sach me koi product row ho (scroll par bhi re-check) */
+function checkRow(){
+  if(mx<0)return showFor(null);
+  const el=document.elementFromPoint(mx,my);
+  showFor(el&&el.closest?el.closest('.row'):null);
+}
+window.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  fx(mx+30);fy(my-120);fr(gsap.utils.clamp(-12,12,(mx-lx)*.6));lx=mx;
+  checkRow();
+});
+document.documentElement.addEventListener('mouseleave',()=>{mx=-1;checkRow()});
+window.addEventListener('blur',()=>{mx=-1;checkRow()});
+lenis.on('scroll',checkRow);
+gsap.from('.row',{y:50,opacity:0,stagger:.12,duration:.9,ease:'power3.out',scrollTrigger:{trigger:'#rows',start:'top 85%'}});
+
+/* categories parallax */
+gsap.utils.toArray('.cat .im img').forEach(im=>gsap.fromTo(im,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:'.cats',start:'top bottom',end:'bottom top',scrub:true}}));
+
+/* north to south journey: pinned compass */
+(function(){
+  const sec=document.querySelector('.ns'),g=document.getElementById('ticks'),NS='http://www.w3.org/2000/svg';
+  for(let i=0;i<72;i++){
+    const l=document.createElementNS(NS,'line'),len=i%6===0?4:2;
+    l.setAttribute('x1',50);l.setAttribute('x2',50);l.setAttribute('y1',1.5);l.setAttribute('y2',1.5+len);
+    l.setAttribute('transform','rotate('+(i*5)+' 50 50)');g.appendChild(l);
+  }
+  const st=gsap.utils.toArray('.ncopy .st');
+  gsap.set(st.slice(1),{opacity:0,y:40});
+  const tl=gsap.timeline({scrollTrigger:{trigger:sec,start:'top top',end:'+=300%',pin:true,scrub:1}});
+  tl.to('.nwrd',{yPercent:-50,ease:'none',duration:3},0)
+    .to('.ring',{rotation:180,transformOrigin:'50% 50%',ease:'none',duration:3},0)
+    .to('.nrule .nd',{top:'100%',ease:'none',duration:3},0)
+    .to('.arch img',{scale:1,ease:'none',duration:3},0)
+    .to(st[0],{opacity:0,y:-40,duration:.4},.8)
+    .to(st[1],{opacity:1,y:0,duration:.4},1.1)
+    .to(st[1],{opacity:0,y:-40,duration:.4},1.8)
+    .to(st[2],{opacity:1,y:0,duration:.4},2.1);
+})();
+
+/* lookbook */
+mm.add('(min-width:701px)',()=>{
+  gsap.fromTo('.look',{scale:.88,borderRadius:'60px'},{scale:1,borderRadius:'24px',ease:'none',scrollTrigger:{trigger:'.look',start:'top bottom',end:'top 15%',scrub:true}});
+});
+gsap.fromTo('.look .im img',{yPercent:-6,scale:1.12},{yPercent:6,scale:1.12,ease:'none',scrollTrigger:{trigger:'.look',start:'top bottom',end:'bottom top',scrub:true}});
+gsap.from('.dot',{scale:0,stagger:.2,duration:.6,ease:'back.out(2)',scrollTrigger:{trigger:'.look',start:'top 40%'}});
+
+/* lookbook hotspots: click + → content card */
+(function(){
+  const look=document.querySelector('.look'),dots=[...document.querySelectorAll('.dot')];
+  function close(d){
+    if(!d.classList.contains('open'))return;
+    d.classList.remove('open');d.setAttribute('aria-expanded','false');
+    const pop=d.querySelector('.pop');
+    gsap.to(pop,{opacity:0,y:8,scale:.97,duration:.25,ease:'power2.in',overwrite:true,onComplete:()=>{pop.style.visibility='hidden'}});
+  }
+  function open(d){
+    dots.forEach(o=>o!==d&&close(o));
+    const pop=d.querySelector('.pop');
+    d.classList.add('open');d.setAttribute('aria-expanded','true');
+    /* keep the card inside the image and on screen */
+    gsap.set(pop,{visibility:'hidden',opacity:0,x:0,xPercent:-50,y:0,scale:1});
+    pop.style.top='calc(100% + 16px)';pop.style.bottom='auto';
+    const w=pop.offsetWidth,h=pop.offsetHeight,dr=d.getBoundingClientRect(),lr=look.getBoundingClientRect();
+    const cx=dr.left+dr.width/2-lr.left;
+    const left=Math.min(Math.max(cx-w/2,12),lr.width-w-12);
+    const below=window.innerHeight-dr.bottom,above=dr.top;
+    const up=below<h+30&&above>below;
+    if(up){pop.style.top='auto';pop.style.bottom='calc(100% + 16px)'}
+    gsap.set(pop,{x:left-(cx-w/2)});
+    gsap.fromTo(pop,{opacity:0,y:up?-10:10,scale:.96},{opacity:1,y:0,scale:1,visibility:'visible',duration:.45,ease:'power3.out',overwrite:'auto'});
+  }
+  dots.forEach(d=>d.addEventListener('click',e=>{
+    if(e.target.closest('.pop'))return;
+    d.classList.contains('open')?close(d):open(d);
+  }));
+  document.addEventListener('click',e=>{if(!e.target.closest('.dot'))dots.forEach(close)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')dots.forEach(close)});
+})();
+
+/* statement: scrub word reveal */
+document.querySelectorAll('.rv').forEach(p=>{
+  p.innerHTML=p.textContent.trim().split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(' ');
+  gsap.to(p.querySelectorAll('.w'),{opacity:1,stagger:.1,ease:'none',scrollTrigger:{trigger:p,start:'top 85%',end:'bottom 55%',scrub:true}});
+});
+
+/* craft + magazine reveals */
+gsap.utils.toArray('.craft .im,.mag .im').forEach(im=>{
+  gsap.from(im,{clipPath:'inset(14% 10% 14% 10%)',duration:1.3,ease:'power3.out',scrollTrigger:{trigger:im,start:'top 88%'}});
+  gsap.fromTo(im.querySelector('img'),{yPercent:-7,scale:1.15},{yPercent:7,scale:1.15,ease:'none',scrollTrigger:{trigger:im,start:'top bottom',end:'bottom top',scrub:true}});
+});
+gsap.from('.mag .a small,.mag .a h5,.mag .a p',{y:24,opacity:0,stagger:.04,duration:.8,scrollTrigger:{trigger:'.mag .g',start:'top 70%'}});
+
+/* review cards */
+gsap.utils.toArray('.card').forEach((c,i,arr)=>{
+  if(i===arr.length-1)return;
+  gsap.to(c,{scale:.92,opacity:.6,ease:'none',scrollTrigger:{trigger:arr[i+1],start:'top 80%',end:'top 15%',scrub:true}});
+});
+
+/* insta marquee with scroll-velocity */
+const insta=gsap.to('#insta',{xPercent:-50,duration:30,ease:'none',repeat:-1});
+ScrollTrigger.create({onUpdate:s=>gsap.to(insta,{timeScale:1+Math.abs(s.getVelocity())/500,duration:.3,overwrite:true})});
+
+/* trust */
+gsap.from('.tf',{y:40,opacity:0,stagger:.12,duration:.8,ease:'power3.out',scrollTrigger:{trigger:'.trust',start:'top 90%'}});
+
+/* brand mega scroll */
+gsap.fromTo('#big',{x:'8%'},{x:'-35%',ease:'none',scrollTrigger:{trigger:'.brand',start:'top bottom',end:'bottom top',scrub:true}});
+
+/* cursor */
+const cur=document.querySelector('.cur');
+const cx=gsap.quickTo(cur,'x',{duration:.35,ease:'power3'}),cy=gsap.quickTo(cur,'y',{duration:.35,ease:'power3'});
+window.addEventListener('mousemove',e=>{cur.style.opacity=1;cx(e.clientX-7);cy(e.clientY-7)});
+document.querySelectorAll('a,.pill,.dot').forEach(el=>{
+  el.addEventListener('mouseenter',()=>gsap.to(cur,{scale:3.5,duration:.3}));
+  el.addEventListener('mouseleave',()=>gsap.to(cur,{scale:1,duration:.3}));
+});
+
+window.addEventListener('load',()=>ScrollTrigger.refresh());
+</script>
+</body>
+</html>
